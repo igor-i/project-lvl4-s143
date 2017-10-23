@@ -6,4 +6,5 @@ Result: http://lit-fortress-85481.herokuapp.com/
 [![Build Status](https://travis-ci.org/igor-i/project-lvl4-s143.svg?branch=master)](https://travis-ci.org/igor-i/project-lvl4-s143)
 [![Code Climate](https://codeclimate.com/github/igor-i/project-lvl4-s143/badges/gpa.svg)](https://codeclimate.com/github/igor-i/project-lvl4-s143)
 [![Issue Count](https://codeclimate.com/github/igor-i/project-lvl4-s143/badges/issue_count.svg)](https://codeclimate.com/github/igor-i/project-lvl4-s143)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/3287ae81d02a3ed3b994/maintainability)](https://codeclimate.com/github/igor-i/project-lvl4-s143/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3287ae81d02a3ed3b994/test_coverage)](https://codeclimate.com/github/igor-i/project-lvl4-s143/test_coverage)
