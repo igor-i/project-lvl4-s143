@@ -1,6 +1,8 @@
 <?php
 
-namespace Tests;
+namespace Tests\Feature;
+
+use Tests\TestCase;
 
 class WelcomeTest extends TestCase
 {
@@ -11,7 +13,7 @@ class WelcomeTest extends TestCase
      */
     public function testApplication()
     {
-        $response = $this->call('GET', '/');
-        $this->assertEquals(200, $response->status());
+        $response = $this->get('/');
+        $response->assertStatus(200);
     }
 }
