@@ -1,5 +1,5 @@
 lint:
-	composer run-script phpcs -- --standard=PSR2 public routes tests
+	composer run-script phpcs -- --standard=PSR2 routes tests
 test:
 	phpunit
 install:
