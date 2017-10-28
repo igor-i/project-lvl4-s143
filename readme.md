@@ -1,6 +1,6 @@
 # Task Manager
 
-The project in Hexlet.io: Task Manager. This is a task management system.
+The project in Hexlet.io: Task Manager. This is a simple task management system.
 Result: https://igori-task-manager.herokuapp.com/
 
 [![Build Status](https://travis-ci.org/igor-i/project-lvl4-s143.svg?branch=master)](https://travis-ci.org/igor-i/project-lvl4-s143)
