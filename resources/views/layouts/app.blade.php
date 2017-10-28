@@ -7,7 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet"
+    @if (App::environment() === 'local')
+        href="{{ asset('/css/app.css') }}"
+    @else
+        href="{{ secure_asset('/css/app.css') }}"
+    @endif
+    >
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"--}}
           {{--integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">--}}
 
@@ -22,7 +28,13 @@
 </div>
 
 <!-- Optional JavaScript -->
-<script src="{{ asset('/js/app.js') }}"></script>
+<script
+        @if (App::environment() === 'local')
+        src="{{ asset('/js/app.js') }}"
+        @else
+        src="{{ secure_asset('/js/app.js') }}"
+        @endif
+></script>
 
 </body>
 </html>
