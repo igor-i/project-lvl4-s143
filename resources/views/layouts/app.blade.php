@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link href="{{ asset('/css/app.css') }}"  rel="stylesheet">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
     <title>Page Analyzer - @yield('title')</title>
 </head>
 
 <body>
-    <div class="container">
-        <p>
-            @yield('content')
-        </p>
-    </div>
+<div class="container">
+    <p>
+        @yield('content')
+    </p>
+</div>
 
 <!-- Optional JavaScript -->
 <script src="{{ asset('/js/app.js') }}"></script>
