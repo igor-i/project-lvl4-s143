@@ -18,7 +18,7 @@
         To view tasks in guest mode registration is not required. But in order to create or edit task, you must
         registration and log into the system.
         </p>
-        <div class="text-center">
+        <div>
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
