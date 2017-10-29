@@ -11,6 +11,5 @@ logs:
 deploy:
 	git push heroku master
 	heroku run php artisan migrate
-	heroku run php artisan queue:restart
 jobs:
 	php artisan queue:work --once
