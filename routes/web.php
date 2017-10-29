@@ -12,6 +12,14 @@
 */
 
 Route::get('/', function () {
-    \Log::debug('Here is some debug information');
-    return view('welcome');
+//    \Log::debug('Here is some debug information');
+    if (Auth::check()) {
+        return view('home');
+    } else {
+        return view('welcome');
+    }
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
