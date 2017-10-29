@@ -10,6 +10,9 @@
 
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
+    <!-- Font Awesome Icons -->
+    <script src="https://use.fontawesome.com/e5f9b75319.js"></script>
+
     <!-- Styles -->
     <link rel="stylesheet"
           @if (App::environment() === 'local')
@@ -32,7 +35,16 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                &nbsp;
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-tasks" aria-hidden="true"></i> Tasks
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-users" aria-hidden="true"></i> Users
+                    </a>
+                </li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">
@@ -46,9 +58,16 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="app-navbar-dropdown-menu-link">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="app-navbar-dropdown-menu-link">
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            Profile
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            Logout
+                        </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
