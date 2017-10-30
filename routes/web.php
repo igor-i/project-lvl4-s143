@@ -14,21 +14,29 @@
 Route::get('/', function () {
 //    \Log::debug('Here is some debug information');
     if (Auth::check()) {
-        return redirect()->route('tasks');
+        return redirect()->route('tasks.index');
     } else {
-        return redirect()->route('welcome');
+        return redirect()->route('welcome.index');
     }
 });
 
 Route::get('/welcome', function () {
 //    \Log::debug('Here is some debug information');
     if (Auth::check()) {
-        return redirect()->route('tasks');
+        return redirect()->route('tasks.index');
     } else {
         return view('welcome');
     }
-})->name('welcome');
+})->name('welcome.index');
 
 Auth::routes();
 
-Route::get('/tasks', 'TasksController@index')->name('tasks');
+Route::get('/tasks', 'TasksController@index')->name('tasks.index');
+
+Route::get('/users', 'UsersController@index')->name('users.index');
+
+Route::get('/profile', 'ProfileController@index')->name('profile.edit');
+
+Route::post('/profile', 'ProfileController@update')->name('profile.update');
+
+Route::delete('/profile', 'ProfileController@destroy')->name('profile.destroy');

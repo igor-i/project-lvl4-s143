@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class TasksController extends Controller
+class UsersController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,6 +23,7 @@ class TasksController extends Controller
      */
     public function index()
     {
-        return view('tasks', ['tasks' => []]);
+        $users = DB::table('users')->paginate(15);
+        return view('users', ['users' => $users]);
     }
 }

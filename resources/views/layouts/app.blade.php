@@ -36,12 +36,12 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link @yield('tasksIsActive')" href="{{ route('tasks.index') }}">
                         <i class="fa fa-tasks" aria-hidden="true"></i> Tasks
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link @yield('usersIsActive')" href="{{ route('users.index') }}">
                         <i class="fa fa-users" aria-hidden="true"></i> Users
                     </a>
                 </li>
@@ -54,12 +54,12 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                 @else
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="app-navbar-dropdown-menu-link"
+                    <a href="#" class="nav-link dropdown-toggle @yield('profileIsActive')" id="app-navbar-dropdown-menu-link"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="app-navbar-dropdown-menu-link">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item @yield('profileIsActive')" href="{{ route('profile.edit') }}">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                             Profile
                         </a>

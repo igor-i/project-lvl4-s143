@@ -11,5 +11,7 @@ logs:
 deploy:
 	git push heroku master
 	heroku run php artisan migrate
+commit:
+	git push -u origin master
 jobs:
 	php artisan queue:work --once
