@@ -4,25 +4,11 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class WelcomeTest extends TestCase
 {
-//    public function setUp()
-//    {
-//        parent::setUp();
-//        Artisan::call('migrate');
-//    }
-//
-//    public function tearDown()
-//    {
-//        Artisan::call('migrate:reset');
-//        parent::tearDown();
-//    }
-
-
     use DatabaseMigrations;
 
     /**
@@ -46,20 +32,6 @@ class WelcomeTest extends TestCase
         $responseWelcome = $this->get('/welcome');
         $responseWelcome->assertStatus(200);
     }
-//
-//    public function testUserRegistration()
-//    {
-//        $response = $this->post(
-//            '/register',
-//            [
-//                'name' => 'Test',
-//                'email' => 'test@test.io',
-//                'password' => '111111'
-//            ]
-//        );
-//        $response->assertStatus(200);
-//        $this->assertDatabaseHas('users', ['email' => 'test@test.io']);
-//    }
 
     /**
      * A basic request test / for auth user.
@@ -74,7 +46,6 @@ class WelcomeTest extends TestCase
             ->withSession(['foo' => 'bar'])
             ->get('/');
 
-//        $response = $this->get('/');
         $response->assertRedirect('/tasks');
     }
 }

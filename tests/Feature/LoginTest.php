@@ -8,8 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class LoginTest extends TestCase
 {
     /**
-     * Guest.
-     *
      * @return void
      */
     public function testApplication()

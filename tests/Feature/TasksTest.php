@@ -8,8 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class TasksTest extends TestCase
 {
     /**
-     * Guest.
-     *
      * @return void
      */
     public function testApplication()
