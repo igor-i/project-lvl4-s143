@@ -42,12 +42,7 @@ class WelcomeTest extends TestCase
         $responseWelcome->assertStatus(200);
     }
 
-    /**
-     * A basic request test / for auth user.
-     *
-     * @return void
-     */
-    public function testRedirectAuth()
+    public function testUserRegistration()
     {
         $this->post(
             '/register',
@@ -57,6 +52,16 @@ class WelcomeTest extends TestCase
                 'password' => '111111'
             ]
         );
+        $this->assertDatabaseHas('users', ['email' => 'test@test.io']);
+    }
+
+    /**
+     * A basic request test / for auth user.
+     *
+     * @return void
+     */
+    public function testRedirectAuth()
+    {
         $response = $this->get('/');
         $response->assertRedirect('/tasks');
     }
