@@ -2,7 +2,6 @@ lint:
 	composer run-script phpcs -- --standard=PSR2 routes tests
 test:
 	phpunit
-	php artisan dusk
 install:
 	composer install
 run:
