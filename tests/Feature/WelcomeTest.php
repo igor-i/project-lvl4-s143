@@ -4,29 +4,60 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 
 class WelcomeTest extends TestCase
 {
-    /**
-     * A basic response test - /.
-     *
-     * @return void
-     */
-    public function testApplicationRoot()
+    public function setUp()
     {
-        $response = $this->get('/');
-        $response->assertRedirect('/welcome');
-//        $response->assertStatus(200);
+        parent::setUp();
+        Artisan::call('migrate');
+    }
+
+    public function tearDown()
+    {
+        Artisan::call('migrate:reset');
+        parent::tearDown();
     }
 
     /**
-     * A basic response test - /welcome.
+     * A basic request test / for guest user.
      *
      * @return void
      */
-    public function testApplicationWelcome()
+    public function testRedirectGuest()
+    {
+        $response = $this->get('/');
+        $response->assertRedirect('/welcome');
+    }
+
+    /**
+     * A basic response test /welcome.
+     *
+     * @return void
+     */
+    public function testApplication()
     {
         $responseWelcome = $this->get('/welcome');
         $responseWelcome->assertStatus(200);
+    }
+
+    /**
+     * A basic request test / for auth user.
+     *
+     * @return void
+     */
+    public function testRedirectAuth()
+    {
+        $this->post(
+            '/register',
+            [
+                'name' => 'Test',
+                'email' => 'test@test.io',
+                'password' => '111111'
+            ]
+        );
+        $response = $this->get('/');
+        $response->assertRedirect('/tasks');
     }
 }
