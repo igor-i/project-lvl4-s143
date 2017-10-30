@@ -44,7 +44,7 @@ class WelcomeTest extends TestCase
 
     public function testUserRegistration()
     {
-        $this->post(
+        $response = $this->post(
             '/register',
             [
                 'name' => 'Test',
@@ -52,6 +52,7 @@ class WelcomeTest extends TestCase
                 'password' => '111111'
             ]
         );
+        $response->assertStatus(200);
         $this->assertDatabaseHas('users', ['email' => 'test@test.io']);
     }
 
