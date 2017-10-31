@@ -45,6 +45,23 @@
                         <i class="fa fa-users" aria-hidden="true"></i> Users
                     </a>
                 </li>
+                @auth
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle @yield('tagsIsActive') @yield('statusesIsActive')"
+                       id="settings-navbar-dropdown-menu-link"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cogs" aria-hidden="true"></i> Settings
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="settings-navbar-dropdown-menu-link">
+                        <a class="dropdown-item @yield('statusesIsActive')" href="{{ route('statuses.index') }}">
+                            Statuses
+                        </a>
+                        <a class="dropdown-item @yield('tagsIsActive')" href="{{ route('tags.index') }}">
+                            Tags
+                        </a>
+                    </div>
+                </li>
+                @endauth
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">

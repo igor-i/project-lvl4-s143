@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class UsersController extends Controller
+class StatusesController extends Controller
 {
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -21,7 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->paginate(15);
-        return view('users', ['users' => $users]);
+        $statuses = DB::table('TaskStatuses')->paginate(15);
+        return view('statuses', ['statuses' => $statuses]);
     }
 }

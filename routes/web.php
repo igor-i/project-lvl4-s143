@@ -35,6 +35,10 @@ Route::get('/tasks', 'TasksController@index')->name('tasks.index');
 
 Route::get('/users', 'UsersController@index')->name('users.index');
 
+Route::get('/statuses', 'StatusesController@index')->name('statuses.index');
+
+Route::get('/tags', 'TagsController@index')->name('tags.index');
+
 Route::get('/profile', 'ProfileController@index')->name('profile.edit');
 
 Route::post('/profile', 'ProfileController@update')->name('profile.update');
