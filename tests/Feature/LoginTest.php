@@ -43,7 +43,7 @@ class LoginTest extends TestCase
         }
     }
 
-    public function testLoginForm(Request $request)
+    public function testLoginForm()
     {
         factory(User::class)->create([
             'name' => 'Test',
@@ -57,13 +57,13 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-        if ($request->Auth::check()) {
+        if ($response->Auth::check()) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
 
-        $response->assertTrue($request->Auth::user()->name == 'Test');
+//        $response->assertTrue($request->Auth::user()->name == 'Test');
 //        $response->assertViewIs('task');
     }
 
