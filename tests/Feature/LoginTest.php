@@ -12,8 +12,8 @@ use App\User;
 
 class LoginTest extends TestCase
 {
-//    use DatabaseMigrations;
-    use RefreshDatabase;
+    use DatabaseMigrations;
+//    use RefreshDatabase;
 
     /**
      * @return void
@@ -38,7 +38,7 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-        $this->assertTrue(Auth::user()->name == 'Test');
+        $this->assertTrue($response->Auth::user()->name == 'Test');
 //        $response->assertViewIs('task');
     }
 }
