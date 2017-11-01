@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -23,14 +25,19 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      *
-     * @var string
+     * @return string
      */
-    protected $redirectTo = '/task';
+    protected function redirectTo()
+    {
+        $name = Auth::user()->name;
+        flash("Hello {$name}! You are logged in.")->success();
+        return '/task';
+    }
 
     /**
-     * Create a new controller instance.
+     * LoginController constructor.
      *
-     * @return void
+     * Create a new controller instance.
      */
     public function __construct()
     {

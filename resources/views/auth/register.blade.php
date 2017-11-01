@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Register')
+
 @section('content')
     <div class="card" style="width: 30rem;">
         <div class="card-body">
