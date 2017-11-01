@@ -22,6 +22,6 @@ class UsersTest extends TestCase
             ->withSession(['foo' => 'bar'])
             ->get('/user');
 
-        $response->assertStatus(200);
+        $response->assertRedirect('/task');
     }
 }
