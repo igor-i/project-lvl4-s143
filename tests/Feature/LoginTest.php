@@ -3,13 +3,16 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 use App\User;
 
 class LoginTest extends TestCase
 {
     use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @return void
@@ -25,7 +28,15 @@ class LoginTest extends TestCase
         factory(User::class)->create([
             'name' => 'Test',
             'email' => 'test@test.io',
+            'password' => '111111'
         ]);
-        $this->assertTrue(true);
+
+        $response = $this->post('/login', [
+            'name' => 'Test',
+            'email' => 'test@test.io',
+            'password' => '111111'
+        ]);
+
+        $response->assertViewIs('task');
     }
 }
