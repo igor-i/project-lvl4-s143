@@ -12,7 +12,7 @@ use App\User;
 
 class LoginTest extends TestCase
 {
-    use DatabaseMigrations;
+//    use DatabaseMigrations;
     use RefreshDatabase;
 
     /**
