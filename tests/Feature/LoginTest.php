@@ -38,7 +38,7 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-        $this->assertTrue($response->Auth::user()->name == 'Test');
+        $this->assertTrue(Auth::user()->name == 'Test');
 //        $response->assertViewIs('task');
     }
 }
