@@ -35,7 +35,13 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-        $this->assertTrue(Auth::user()->name == 'Test');
+        if (Auth::check()) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+
+//        $this->assertTrue(Auth::user()->name == 'Test');
 //        $response->assertViewIs('task');
     }
 
@@ -53,7 +59,7 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-        $response->assertTrue($response->user()->name == 'Test');
-//        $response->assertViewIs('task');
+//        $response->assertTrue($response->user()->name == 'Test');
+        $response->assertViewIs('task');
     }
 }
