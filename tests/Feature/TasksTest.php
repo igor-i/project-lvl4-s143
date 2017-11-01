@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 use App\User;
@@ -13,7 +12,6 @@ class TasksTest extends TestCase
 {
 
     use DatabaseMigrations;
-    use RefreshDatabase;
 
     /**
      * @return void
