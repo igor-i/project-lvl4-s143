@@ -6,6 +6,7 @@ use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 
@@ -37,6 +38,7 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-        $response->assertViewIs('task');
+        $this->assertTrue($response->Auth::user()->name == 'Test');
+//        $response->assertViewIs('task');
     }
 }
