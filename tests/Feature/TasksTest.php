@@ -12,7 +12,7 @@ class TasksTest extends TestCase
      */
     public function testApplication()
     {
-        $response = $this->get('/tasks');
+        $response = $this->get('/task');
         $response->assertStatus(200);
     }
 }

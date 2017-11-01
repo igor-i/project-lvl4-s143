@@ -4,9 +4,13 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\User;
 
 class LoginTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /**
      * @return void
      */
@@ -14,5 +18,14 @@ class LoginTest extends TestCase
     {
         $response = $this->get('/login');
         $response->assertStatus(200);
+    }
+
+    public function testLoginForm()
+    {
+        factory(User::class)->create([
+            'name' => 'Test',
+            'email' => 'test@test.io',
+        ]);
+        $this->assertTrue(true);
     }
 }

@@ -1,5 +1,5 @@
 lint:
-	composer run-script phpcs -- --standard=PSR2 routes tests
+	composer run-script phpcs -- --standard=PSR2 routes tests app/Http
 test:
 	phpunit
 install:
@@ -13,5 +13,3 @@ deploy:
 	heroku run php artisan migrate
 github:
 	git push -u origin master
-jobs:
-	php artisan queue:work --once

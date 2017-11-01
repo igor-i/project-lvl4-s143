@@ -46,6 +46,6 @@ class WelcomeTest extends TestCase
             ->withSession(['foo' => 'bar'])
             ->get('/');
 
-        $response->assertRedirect('/tasks');
+        $response->assertRedirect('/task');
     }
 }

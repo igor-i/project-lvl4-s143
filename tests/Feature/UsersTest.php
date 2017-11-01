@@ -21,7 +21,7 @@ class UsersTest extends TestCase
             'email' => 'test@test.io',
         ]);
 
-        $response = $this->get('/users');
+        $response = $this->get('/user');
         $response->assertStatus(200);
     }
 }
