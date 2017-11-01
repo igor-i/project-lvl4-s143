@@ -16,12 +16,11 @@ class UsersTest extends TestCase
      */
     public function testApplication()
     {
-        factory(User::class)->create([
-            'name' => 'Test',
-            'email' => 'test@test.io',
-        ]);
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->get('/user');
 
-        $response = $this->get('/user');
         $response->assertStatus(200);
     }
 }
