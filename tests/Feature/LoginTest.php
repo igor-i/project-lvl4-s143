@@ -23,11 +23,11 @@ class LoginTest extends TestCase
 
     public function testLoginForm()
     {
-        factory(User::class)->create([
-            'name' => 'Test',
-            'email' => 'test@test.io',
-            'password' => '111111'
-        ]);
+//        factory(User::class)->create([
+//            'name' => 'Test',
+//            'email' => 'test@test.io',
+//            'password' => '111111'
+//        ]);
 
         $response = $this->post('/login', [
             'name' => 'Test',
