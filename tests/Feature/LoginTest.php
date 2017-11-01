@@ -35,7 +35,6 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-//        $response->assertViewIs('task');
-        $response->assertStatus(200);
+        $response->assertRedirect('/task');
     }
 }
