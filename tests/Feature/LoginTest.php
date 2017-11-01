@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 
@@ -48,14 +49,14 @@ class LoginTest extends TestCase
     public function testLoginForm2()
     {
         factory(User::class)->create([
-            'name' => 'Test',
-            'email' => 'test@test.io',
+            'name' => 'Test2',
+            'email' => 'test2@test.io',
             'password' => '111111'
         ]);
 
         $response = $this->post('/login', [
-            'name' => 'Test',
-            'email' => 'test@test.io',
+            'name' => 'Test2',
+            'email' => 'test2@test.io',
             'password' => '111111'
         ]);
 
