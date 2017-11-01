@@ -29,6 +29,7 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
+        $this->get('/login');
         $response = $this->post('/login', [
             'name' => 'Test',
             'email' => 'test@test.io',
