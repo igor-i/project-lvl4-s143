@@ -6,6 +6,7 @@ use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 use App\User;
 
@@ -22,7 +23,27 @@ class LoginTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testLoginForm()
+    public function testAuthenticate()
+    {
+        factory(User::class)->create([
+            'name' => 'Test',
+            'email' => 'test@test.io',
+            'password' => '111111'
+        ]);
+
+        if (Auth::attempt([
+            'name' => 'Test',
+            'email' => 'test@test.io',
+            'password' => '111111'
+        ])) {
+            // Authentication passed...
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false);
+        }
+    }
+
+    public function testLoginForm(Request $request)
     {
         factory(User::class)->create([
             'name' => 'Test',
@@ -36,13 +57,13 @@ class LoginTest extends TestCase
             'password' => '111111'
         ]);
 
-        if (Auth::check()) {
+        if ($request->Auth::check()) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
 
-//        $this->assertTrue(Auth::user()->name == 'Test');
+        $response->assertTrue($request->Auth::user()->name == 'Test');
 //        $response->assertViewIs('task');
     }
 
