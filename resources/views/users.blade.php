@@ -2,45 +2,35 @@
 
 @section('title', 'Users')
 
-@section('usersIsActive', 'active')
-
 @section('content')
 <div class="container">
     <div>
         <h1 class="display-4">Users</h1>
 
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        @if (!empty(($users[0])))
+        @if ($users->count() > 0)
         <table class="table table-striped table-sm">
             <thead>
             <tr>
-                @foreach ($users[0] as $key => $item)
-                    @if ($key !== 'password' && $key !== 'remember_token')
-                        <th>{{ $key }}</th>
-                    @endif
-                @endforeach
+                <th>#</th>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>created_at</th>
+                <th>updated_at</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($users as $user)
+            @foreach ($users as $key => $user)
+                @php
+                    $email = preg_replace('/\w/', '*', $user->email, 5);
+                @endphp
                 <tr>
-                    @foreach ($user as $key => $item)
-                        @if ($key === 'id')
-                            <th scope="row">{{ $item }}</th>
-                        @elseif ($key === 'email')
-                            @php
-                                $email = preg_replace('/\w/', '*', $item, 5);
-                            @endphp
-                            <td>{{ $email }}</td>
-                        @elseif ($key !== 'password' && $key !== 'remember_token')
-                            <td>{{ $item }}</td>
-                        @endif
-                    @endforeach
+                    <th scope="row">{{ $users->firstItem() + $key }}</th>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $email }}</td>
+                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->updated_at }}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -48,12 +38,12 @@
 
         <p>
             <nav aria-label="Users navigation">
-                {{ $users->links() }}
+                {{ $users->links('vendor/pagination/bootstrap-4') }}
             </nav>
         </p>
 
         @else
-            <p>...there is no tasks</p>
+            <p>...there is no users</p>
         @endif
 
     </div>

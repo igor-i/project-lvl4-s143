@@ -23,6 +23,9 @@
 <div class="container">
     <p>
     <div class="jumbotron">
+        <p>
+            @include('flash::message')
+        </p>
         <h1 class="display-3">Task Manager</h1>
         <p class="lead">This is a simple task management system.
             The project in <a href="https://hexlet.io" target="_blank">Hexlet.io</a>.</p>
@@ -48,10 +51,10 @@
                     <a class="dropdown-item" href="{{ route('register') }}">Create a new account</a>
                 </div>
             </div>
-            <a class="btn btn-primary btn-lg" href="{{ route('tasks.index') }}" role="button">Go to Tasks</a>
+            <a class="btn btn-primary btn-lg" href="{{ route('task.index') }}" role="button">Go to Tasks</a>
         </div>
     </div>
-</p>
+    </p>
 </div>
 
 <!-- Scripts -->

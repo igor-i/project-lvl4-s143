@@ -2,16 +2,15 @@
 
 @section('title', 'User Profile')
 
-@section('profileIsActive', 'active')
-
 @section('content')
     <div class="card" style="width: 30rem;">
         <div class="card-body">
             <h4 class="card-title"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ $user->name }}</h4>
             <h6 class="card-subtitle mb-2 text-muted">Edit your profile information</h6>
             <p class="card-text">
-            <form method="POST" action="{{ route('profile.update') }}">
+            <form method="POST" action="{{ route('user.update', Auth::user()->id) }}">
                 {{ csrf_field() }}
+                {{ method_field('PATCH') }}
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name">Name</label>
@@ -63,7 +62,7 @@
                 </div>
             </form>
 
-            <form method="POST" id="delete-form" action="{{ route('profile.destroy') }}">
+            <form method="POST" id="delete-form" action="{{ route('user.destroy', Auth::user()->id) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <p>

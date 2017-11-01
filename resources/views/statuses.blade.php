@@ -2,18 +2,10 @@
 
 @section('title', 'Statuses')
 
-@section('statusesIsActive', 'active')
-
 @section('content')
     <div class="container">
         <div>
             <h1 class="display-4">Statuses</h1>
-
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
 
             @if (!empty(($statuses[0])))
             <table class="table table-striped table-sm">
@@ -40,8 +32,8 @@
             </table>
 
             <p>
-                <nav aria-label="Users navigation">
-                    {{ $statuses->links() }}
+                <nav aria-label="Statuses navigation">
+                    {{ $statuses->links('vendor/pagination/bootstrap-4') }}
                 </nav>
             </p>
 

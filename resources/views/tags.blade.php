@@ -2,18 +2,10 @@
 
 @section('title', 'Tags')
 
-@section('tagsIsActive', 'active')
-
 @section('content')
     <div class="container">
         <div>
             <h1 class="display-4">Tags</h1>
-
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
 
             @if (!empty(($tags[0])))
             <table class="table table-striped table-sm">
@@ -46,11 +38,11 @@
                 </tbody>
             </table>
 
-            <p>
-                <nav aria-label="Users navigation">
-                    {{ $tags->links() }}
-                </nav>
-            </p>
+                <p>
+                    <nav aria-label="Tags navigation">
+                        {{ $tags->links('vendor/pagination/bootstrap-4') }}
+                    </nav>
+                </p>
 
             @else
             <p>...there is no tags</p>

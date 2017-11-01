@@ -36,32 +36,31 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link @yield('tasksIsActive')" href="{{ route('tasks.index') }}">
+                    <a class="nav-link {{ Request::path() == 'task' ? 'active' : '' }}" href="{{ route('task.index') }}">
                         <i class="fa fa-tasks" aria-hidden="true"></i> Tasks
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @yield('usersIsActive')" href="{{ route('users.index') }}">
+                    <a class="nav-link {{ Request::path() == 'user' ? 'active' : '' }}" href="{{ route('user.index') }}">
                         <i class="fa fa-users" aria-hidden="true"></i> Users
                     </a>
                 </li>
-                @auth
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle @yield('tagsIsActive') @yield('statusesIsActive')"
+                    <a href="#" class="nav-link dropdown-toggle
+                        {{ (Request::path() == 'tag' || Request::path() == 'status') ? 'active' : '' }}"
                        id="settings-navbar-dropdown-menu-link"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-cogs" aria-hidden="true"></i> Settings
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="settings-navbar-dropdown-menu-link">
-                        <a class="dropdown-item @yield('statusesIsActive')" href="{{ route('statuses.index') }}">
+                        <a class="dropdown-item {{ Request::path() == 'status' ? 'active' : '' }}" href="{{ route('status.index') }}">
                             Statuses
                         </a>
-                        <a class="dropdown-item @yield('tagsIsActive')" href="{{ route('tags.index') }}">
+                        <a class="dropdown-item {{ Request::path() == 'tag' ? 'active' : '' }}" href="{{ route('tag.index') }}">
                             Tags
                         </a>
                     </div>
                 </li>
-                @endauth
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">
@@ -71,12 +70,13 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                 @else
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle @yield('profileIsActive')" id="app-navbar-dropdown-menu-link"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="nav-link dropdown-toggle {{ Request::path() == 'user.edit' ? 'active' : '' }}"
+                       id="app-navbar-dropdown-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="app-navbar-dropdown-menu-link">
-                        <a class="dropdown-item @yield('profileIsActive')" href="{{ route('profile.edit') }}">
+                        <a class="dropdown-item {{ Request::path() == 'user.edit' ? 'active' : '' }}"
+                           href="{{ route('user.edit', Auth::user()->id) }}">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                             Profile
                         </a>
@@ -96,6 +96,9 @@
     </nav>
 
     <div class="container">
+        <p>
+        @include('flash::message')
+        </p>
         <p>
         @yield('content')
         </p>

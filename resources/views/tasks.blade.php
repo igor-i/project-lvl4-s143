@@ -2,18 +2,10 @@
 
 @section('title', 'Tasks')
 
-@section('tasksIsActive', 'active')
-
 @section('content')
     <div class="container">
         <div>
             <h1 class="display-4">Tasks</h1>
-
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
 
             @if (!empty(($tasks[0])))
             <table class="table table-striped table-sm">
@@ -46,11 +38,11 @@
                 </tbody>
             </table>
 
-            <p>
-                <nav aria-label="Users navigation">
-                    {{ $tasks->links() }}
-                </nav>
-            </p>
+                <p>
+                    <nav aria-label="Tasks navigation">
+                        {{ $tasks->links('vendor/pagination/bootstrap-4') }}
+                    </nav>
+                </p>
 
             @else
             <p>...there is no tasks</p>

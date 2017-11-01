@@ -20,11 +20,11 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show user's profile.
+     * Show the form for editing the user's profile.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function edit()
     {
         return view('profile', ['user' => Auth::user()]);
     }
@@ -70,7 +70,6 @@ class ProfileController extends Controller
      */
     public function destroy()
     {
-        \Log::debug('Here is some debug information');
         DB::table('users')->where('id', Auth::id())->delete();
         return redirect()->route('welcome.index');
     }

@@ -14,16 +14,15 @@
 Route::get('/', function () {
 //    \Log::debug('Here is some debug information');
     if (Auth::check()) {
-        return redirect()->route('tasks.index');
+        return redirect()->route('task.index');
     } else {
         return redirect()->route('welcome.index');
     }
 });
 
 Route::get('/welcome', function () {
-//    \Log::debug('Here is some debug information');
     if (Auth::check()) {
-        return redirect()->route('tasks.index');
+        return redirect()->route('task.index');
     } else {
         return view('welcome');
     }
@@ -31,16 +30,9 @@ Route::get('/welcome', function () {
 
 Auth::routes();
 
-Route::get('/tasks', 'TasksController@index')->name('tasks.index');
-
-Route::get('/users', 'UsersController@index')->name('users.index');
-
-Route::get('/statuses', 'StatusesController@index')->name('statuses.index');
-
-Route::get('/tags', 'TagsController@index')->name('tags.index');
-
-Route::get('/profile', 'ProfileController@index')->name('profile.edit');
-
-Route::post('/profile', 'ProfileController@update')->name('profile.update');
-
-Route::delete('/profile', 'ProfileController@destroy')->name('profile.destroy');
+Route::resources([
+    '/task' => 'TaskController',
+    '/user' => 'UserController',
+    '/status' => 'StatusController',
+    '/tag' => 'TagController'
+]);
