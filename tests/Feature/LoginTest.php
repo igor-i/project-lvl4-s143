@@ -6,8 +6,6 @@ use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-use App\User;
-
 class LoginTest extends TestCase
 {
     use DatabaseMigrations;
@@ -19,23 +17,5 @@ class LoginTest extends TestCase
     {
         $response = $this->get('/login');
         $response->assertStatus(200);
-    }
-
-    public function testLoginForm()
-    {
-        factory(User::class)->create([
-            'name' => 'Test',
-            'email' => 'test@test.io',
-            'password' => '111111'
-        ]);
-
-        $this->get('/login');
-        $response = $this->post('/login', [
-            'name' => 'Test',
-            'email' => 'test@test.io',
-            'password' => '111111'
-        ]);
-
-        $response->assertRedirect('/task');
     }
 }

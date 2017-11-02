@@ -21,4 +21,22 @@ class RegisterTest extends TestCase
         $response = $this->get('/register');
         $response->assertStatus(200);
     }
+
+    public function testRegister()
+    {
+        factory(User::class)->create([
+            'name' => 'Test',
+            'email' => 'test@test.io',
+            'password' => '111111'
+        ]);
+
+//        $this->get('/login');
+        $response = $this->post('/register', [
+            'email' => 'test@test.io',
+            'password' => '111111'
+        ]);
+
+//        TODO проверить создаётся ли пользователь вообще
+        $response->assertRedirect('/task');
+    }
 }
