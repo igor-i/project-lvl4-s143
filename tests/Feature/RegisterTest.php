@@ -31,7 +31,7 @@ class RegisterTest extends TestCase
         ]);
 
 //        $this->get('/login');
-        $response = $this->post('/register', [
+        $response = $this->post('/user', [
             'email' => 'test@test.io',
             'password' => '111111'
         ]);
