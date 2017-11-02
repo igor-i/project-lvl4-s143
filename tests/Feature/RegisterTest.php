@@ -24,19 +24,47 @@ class RegisterTest extends TestCase
 
     public function testRegister()
     {
-        factory(User::class)->create([
+//        factory(User::class)->create([
+//            'name' => 'Test',
+//            'email' => 'test@test.io',
+//            'password' => '111111'
+//        ]);
+
+//        $this->get('/login');
+        $response = $this->post('/user', [
             'name' => 'Test',
             'email' => 'test@test.io',
             'password' => '111111'
         ]);
 
-//        $this->get('/login');
-        $response = $this->post('/user', [
-            'email' => 'test@test.io',
-            'password' => '111111'
+        $this->assertDatabaseHas('users', [
+            'email' => 'test@test.io'
         ]);
 
 //        TODO проверить создаётся ли пользователь вообще
-        $response->assertRedirect('/task');
+//        $response->assertRedirect('/task');
+    }
+
+    public function testRegister1()
+    {
+//        factory(User::class)->create([
+//            'name' => 'Test',
+//            'email' => 'test@test.io',
+//            'password' => '111111'
+//        ]);
+
+//        $this->get('/login');
+        $response = $this->post('/user', [
+            'name' => 'Test1',
+            'email' => 'test1@test.io',
+            'password' => '111111'
+        ]);
+
+        $response->assertDatabaseHas('users', [
+            'email' => 'test1@test.io'
+        ]);
+
+//        TODO проверить создаётся ли пользователь вообще
+//        $response->assertRedirect('/task');
     }
 }
