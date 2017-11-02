@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -45,6 +46,7 @@ class RegisterTest extends TestCase
 //        $this->assertEquals(200, $response->getStatusCode());
 //        $this->assertEquals('auth.login', $response->original->name());
 
+        Session::start();
         $response = $this->post('/register', [
             'name' => 'Test',
             'email' => 'test@test.io',
