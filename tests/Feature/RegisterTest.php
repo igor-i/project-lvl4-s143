@@ -22,16 +22,17 @@ class RegisterTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testRegister()
+
+
+    public function testRegister1()
     {
 //        factory(User::class)->create([
 //            'name' => 'Test',
-//            'email' => 'test@test.io',
+//            'email' => 'test1@test.io',
 //            'password' => '111111'
 //        ]);
 
-//        $this->get('/login');
-        $response = $this->post('/register', [
+        $response = $this->put('/register', [
             'name' => 'Test',
             'email' => 'test@test.io',
             'password' => '111111'
@@ -39,29 +40,6 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'email' => 'test@test.io'
-        ]);
-
-//        TODO проверить создаётся ли пользователь вообще
-//        $response->assertRedirect('/task');
-    }
-
-    public function testRegister1()
-    {
-        factory(User::class)->create([
-            'name' => 'Test',
-            'email' => 'test1@test.io',
-            'password' => '111111'
-        ]);
-
-//        $this->get('/login');
-//        $response = $this->post('/register', [
-//            'name' => 'Test',
-//            'email' => 'test@test.io',
-//            'password' => '111111'
-//        ]);
-
-        $this->assertDatabaseHas('users', [
-            'email' => 'test1@test.io'
         ]);
 
 //        TODO проверить создаётся ли пользователь вообще
