@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -25,14 +26,19 @@ class RegisterController extends Controller
     /**
      * Where to redirect users after registration.
      *
-     * @var string
+     * @return string
      */
-    protected $redirectTo = '/task';
+    protected function redirectTo()
+    {
+        $name = Auth::user()->name;
+        flash("Hello {$name}! You are registered and logged in.")->success();
+        return '/task';
+    }
 
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * RegisterController constructor.
      */
     public function __construct()
     {
