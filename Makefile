@@ -2,6 +2,8 @@ lint:
 	composer run-script phpcs -- --standard=PSR2 routes tests app/Http
 test:
 	phpunit
+devtest:
+	vendor/bin/phpunit
 install:
 	composer install
 run:

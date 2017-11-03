@@ -17,8 +17,8 @@ class WelcomeTest extends TestCase
      */
     public function testRedirectGuest()
     {
-        $response = $this->get('/');
-        $response->assertRedirect('/welcome');
+        $this->get('/')
+            ->assertRedirect('/welcome');
     }
 
     /**
@@ -28,8 +28,8 @@ class WelcomeTest extends TestCase
      */
     public function testApplication()
     {
-        $responseWelcome = $this->get('/welcome');
-        $responseWelcome->assertStatus(200);
+        $this->get('/welcome')
+            ->assertStatus(200);
     }
 
     /**
@@ -41,10 +41,8 @@ class WelcomeTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)
-            ->withSession(['foo' => 'bar'])
-            ->get('/');
-
-        $response->assertRedirect('/task');
+        $this->actingAs($user)
+            ->get('/')
+            ->assertRedirect('/task');
     }
 }
