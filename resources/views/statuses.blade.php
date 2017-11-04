@@ -7,38 +7,51 @@
         <div>
             <h1 class="display-4">Statuses</h1>
 
-            @if (!empty(($statuses[0])))
-            <table class="table table-striped table-sm">
-                <thead>
-                <tr>
-                    @foreach ($statuses[0] as $key => $item)
-                        <th>{{ $key }}</th>
-                    @endforeach
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($statuses as $status)
-                    <tr>
-                        @foreach ($status as $key => $item)
-                            @if ($key === 'id')
-                                <th scope="row">{{ $item }}</th>
-                            @else
-                                <td>{{ $item }}</td>
-                            @endif
-                        @endforeach
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <nav class="navbar navbar-light bg-light justify-content-between">
+                <form class="form-inline">
+                    <a class="btn btn-sm btn-outline-success" href="{{ route('status.create') }}" role="button">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Add new status
+                    </a>
+                </form>
+                <form class="form-inline">
+                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
 
-            <p>
-                <nav aria-label="Statuses navigation">
-                    {{ $statuses->links('vendor/pagination/bootstrap-4') }}
-                </nav>
-            </p>
+            @if ($statuses->count() > 0)
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>created_at</th>
+                        <th>updated_at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($statuses as $key => $status)
+                        <tr>
+                            <th scope="row">{{ $statuses->firstItem() + $key }}</th>
+                            <td>{{ $status->id }}</td>
+                            <td>{{ $status->name }}</td>
+                            <td>{{ $status->created_at }}</td>
+                            <td>{{ $status->updated_at }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
+                <p>
+                    <nav aria-label="Statuses navigation">
+                        {{ $statuses->links('vendor/pagination/bootstrap-4') }}
+                    </nav>
+                </p>
 
             @else
-            <p>...there is no statuses</p>
+                <p>...there is no statuses</p>
             @endif
 
         </div>

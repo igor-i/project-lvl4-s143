@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+
+use App\Status;
+use Carbon\Carbon;
 
 class StatusController extends Controller
 {
@@ -23,7 +25,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        $statuses = DB::table('TaskStatuses')->paginate(15);
+        $statuses = Status::paginate(10);
         return view('statuses', ['statuses' => $statuses]);
     }
 
@@ -34,7 +36,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('create_status');
     }
 
     /**
@@ -45,16 +47,24 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($this->validator($request)) {
+            $status = new Status;
+            $status->name = $request->name;
+            $status->save();
+            flash("Successfully added new '{$request->name}' task status")->success();
+        } else {
+            flash("Failed to added new '{$request->name}' task status")->error();
+        }
+
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Status $status
      */
-    public function show($id)
+    public function show(Status $status)
     {
         //
     }
@@ -62,34 +72,66 @@ class StatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Status $status
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Status $status)
     {
-        //
+        return view('status.edit', ['status' => $status]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Status $status
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Status $status)
     {
-        //
+        if ($this->validator($request, $status)) {
+            $status->update(
+                [
+                    'name' => $request->input('name'),
+                ]
+            );
+
+            flash('Successfully updated task status')->success();
+        } else {
+            flash('Failed to updated task status')->error();
+        }
+
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Status $status
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Status $status)
     {
-        //
+        $status->delete();
+        flash('Task status removed')->warning();
+
+        return redirect()->route('status.index');
+    }
+
+    /**
+     * @param Request $data
+     * @param Status $status
+     * @return array
+     */
+    protected function validator(Request $data, Status $status = null)
+    {
+        return $data->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                $status ? Rule::unique('TaskStatuses')->ignore($status->id) : 'unique:TaskStatuses'
+            ],
+        ]);
     }
 }

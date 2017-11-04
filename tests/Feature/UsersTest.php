@@ -25,6 +25,36 @@ class UsersTest extends TestCase
     }
 
     /**
+     * Update user
+     *
+     * @return void
+     */
+    public function testUpdateUser()
+    {
+        $user = factory(User::class)->create();
+        $newUser = factory(User::class)->make();
+
+        $this->actingAs($user)
+            ->get("/user/{$user->id}/edit")
+            ->assertStatus(200);
+
+        $this->post("/user/{$user->id}", [
+            'name' => $user->name,
+            'email' => $newUser->email,
+            'password' => $user->password,
+            'password_confirmation' => $user->password,
+            '_method' => 'PATCH',
+            '_token' => csrf_token()
+        ])->assertRedirect("/user/{$user->id}/edit");
+
+        $this->assertDatabaseHas('users', [
+            'email' => $newUser->email
+        ]);
+    }
+
+    /**
+     * Delete user
+     *
      * @return void
      */
     public function testDeleteUser()
@@ -32,45 +62,20 @@ class UsersTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-            ->get('/user/1/edit')
+            ->get("/user/{$user->id}/edit")
             ->assertStatus(200);
 
         $this->assertDatabaseHas('users', [
             'email' => $user->email
         ]);
 
-        $this->post('/user/1', [
+        $this->post("/user/{$user->id}", [
             '_method' => 'DELETE',
             '_token' => csrf_token()
         ]);
 
         $this->assertDatabaseMissing('users', [
             'email' => $user->email
-        ]);
-    }
-
-    /**
-     * @return void
-     */
-    public function testUpdateUser()
-    {
-        $user = factory(User::class)->create();
-
-        $this->actingAs($user)
-            ->get('/user/1/edit')
-            ->assertStatus(200);
-
-        $this->post('/user/1', [
-            'name' => $user->name,
-            'email' => 'test@test.io',
-            'password' => $user->password,
-            'password_confirmation' => $user->password,
-            '_method' => 'PATCH',
-            '_token' => csrf_token()
-        ]);
-
-        $this->assertDatabaseHas('users', [
-            'email' => 'test@test.io'
         ]);
     }
 }

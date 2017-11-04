@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        $users = User::paginate(10);
         return view('users')->with('users', $users);
     }
 
@@ -73,26 +73,6 @@ class UserController extends Controller
     }
 
     /**
-     * @param Request $data
-     * @param User $user
-     * @return array
-     */
-    protected function validator(Request $data, User $user)
-    {
-        return $data->validate([
-            'name' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($user->id),
-            ]
-        ]);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param Request $request
@@ -131,5 +111,25 @@ class UserController extends Controller
         flash('The user account is removed')->warning();
 
         return redirect()->route('welcome.index');
+    }
+
+    /**
+     * @param Request $data
+     * @param User $user
+     * @return array
+     */
+    protected function validator(Request $data, User $user = null)
+    {
+        return $data->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                $user ? Rule::unique('users')->ignore($user->id) : 'unique:users'
+            ]
+        ]);
     }
 }
