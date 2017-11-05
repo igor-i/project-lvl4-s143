@@ -78,12 +78,17 @@
                         <a class="dropdown-item {{ Request::path() == 'users.edit' ? 'active' : '' }}"
                            href="{{ route('users.edit', Auth::user()->id) }}">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            Profile
+                            Your profile
                         </a>
-                        <a class="dropdown-item" href="{{ Auth::logout() }}">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             Logout
                         </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </div>
                 </li>
                 @endguest
