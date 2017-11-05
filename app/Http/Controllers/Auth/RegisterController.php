@@ -32,7 +32,7 @@ class RegisterController extends Controller
     {
         $name = Auth::user()->name;
         flash("Hello {$name}! You are registered and logged in.")->success();
-        return '/task';
+        return '/tasks';
     }
 
     /**

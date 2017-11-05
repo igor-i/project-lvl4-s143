@@ -20,7 +20,7 @@ class UsersTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-            ->get('/user')
+            ->get('/users')
             ->assertStatus(200);
     }
 
@@ -35,17 +35,17 @@ class UsersTest extends TestCase
         $newUser = factory(User::class)->make();
 
         $this->actingAs($user)
-            ->get("/user/{$user->id}/edit")
+            ->get("/users/{$user->id}/edit")
             ->assertStatus(200);
 
-        $this->post("/user/{$user->id}", [
+        $this->post("/users/{$user->id}", [
             'name' => $user->name,
             'email' => $newUser->email,
             'password' => $user->password,
             'password_confirmation' => $user->password,
             '_method' => 'PATCH',
             '_token' => csrf_token()
-        ])->assertRedirect("/user/{$user->id}/edit");
+        ])->assertRedirect("/users/{$user->id}/edit");
 
         $this->assertDatabaseHas('users', [
             'email' => $newUser->email
@@ -62,14 +62,14 @@ class UsersTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-            ->get("/user/{$user->id}/edit")
+            ->get("/users/{$user->id}/edit")
             ->assertStatus(200);
 
         $this->assertDatabaseHas('users', [
             'email' => $user->email
         ]);
 
-        $this->post("/user/{$user->id}", [
+        $this->post("/users/{$user->id}", [
             '_method' => 'DELETE',
             '_token' => csrf_token()
         ]);

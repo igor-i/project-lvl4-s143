@@ -43,6 +43,6 @@ class WelcomeTest extends TestCase
 
         $this->actingAs($user)
             ->get('/')
-            ->assertRedirect('/task');
+            ->assertRedirect('/tasks');
     }
 }

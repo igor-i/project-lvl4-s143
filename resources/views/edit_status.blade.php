@@ -8,7 +8,7 @@
             <h4 class="card-title">Edit status</h4>
             <h6 class="card-subtitle mb-2 text-muted">Edit a task status name</h6>
             <p class="card-text">
-            <form method="POST" action="{{ route('status.update', $status->id) }}">
+            <form method="POST" action="{{ route('statuses.update', $status->id) }}">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
 
@@ -27,12 +27,12 @@
                     <button type="submit" class="btn btn-primary" href="#">
                         Edit
                     </button>
-                    <a type="button" class="btn btn-light" role="button" href="{{ route('status.index') }}">
+                    <a type="button" class="btn btn-light" role="button" href="{{ route('statuses.index') }}">
                         Cancel
                     </a>
                 </div>
             </form>
-            <form method="POST" id="delete-form" action="{{ route('status.destroy', $status->id) }}">
+            <form method="POST" id="delete-form" action="{{ route('statuses.destroy', $status->id) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <p>

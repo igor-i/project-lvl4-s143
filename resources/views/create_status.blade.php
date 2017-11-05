@@ -8,7 +8,7 @@
             <h4 class="card-title">Create status</h4>
             <h6 class="card-subtitle mb-2 text-muted">Create a new task status</h6>
             <p class="card-text">
-            <form method="POST" action="{{ route('status.store') }}">
+            <form method="POST" action="{{ route('statuses.store') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -26,7 +26,7 @@
                     <button type="submit" class="btn btn-primary" href="#">
                         Create
                     </button>
-                    <a type="button" class="btn btn-light" role="button" href="{{ route('status.index') }}">
+                    <a type="button" class="btn btn-light" role="button" href="{{ route('statuses.index') }}">
                         Cancel
                     </a>
                 </div>

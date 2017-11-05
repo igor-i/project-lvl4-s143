@@ -36,27 +36,27 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::path() == 'task' ? 'active' : '' }}" href="{{ route('task.index') }}">
+                    <a class="nav-link {{ Request::path() == 'tasks' ? 'active' : '' }}" href="{{ route('tasks.index') }}">
                         <i class="fa fa-tasks" aria-hidden="true"></i> Tasks
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::path() == 'user' ? 'active' : '' }}" href="{{ route('user.index') }}">
+                    <a class="nav-link {{ Request::path() == 'users' ? 'active' : '' }}" href="{{ route('users.index') }}">
                         <i class="fa fa-users" aria-hidden="true"></i> Users
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle
-                        {{ (Request::path() == 'tag' || Request::path() == 'status') ? 'active' : '' }}"
+                        {{ (Request::path() == 'tags' || Request::path() == 'statuses') ? 'active' : '' }}"
                        id="settings-navbar-dropdown-menu-link"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-cogs" aria-hidden="true"></i> Settings
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="settings-navbar-dropdown-menu-link">
-                        <a class="dropdown-item {{ Request::path() == 'status' ? 'active' : '' }}" href="{{ route('status.index') }}">
+                        <a class="dropdown-item {{ Request::path() == 'statuses' ? 'active' : '' }}" href="{{ route('statuses.index') }}">
                             Statuses
                         </a>
-                        <a class="dropdown-item {{ Request::path() == 'tag' ? 'active' : '' }}" href="{{ route('tag.index') }}">
+                        <a class="dropdown-item {{ Request::path() == 'tags' ? 'active' : '' }}" href="{{ route('tags.index') }}">
                             Tags
                         </a>
                     </div>
@@ -70,24 +70,20 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                 @else
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle {{ Request::path() == 'user.edit' ? 'active' : '' }}"
+                    <a href="#" class="nav-link dropdown-toggle {{ Request::path() == 'users.edit' ? 'active' : '' }}"
                        id="app-navbar-dropdown-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="app-navbar-dropdown-menu-link">
-                        <a class="dropdown-item {{ Request::path() == 'user.edit' ? 'active' : '' }}"
-                           href="{{ route('user.edit', Auth::user()->id) }}">
+                        <a class="dropdown-item {{ Request::path() == 'users.edit' ? 'active' : '' }}"
+                           href="{{ route('users.edit', Auth::user()->id) }}">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                             Profile
                         </a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" href="{{ Auth::logout() }}">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             Logout
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
                     </div>
                 </li>
                 @endguest

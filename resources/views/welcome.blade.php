@@ -51,7 +51,7 @@
                     <a class="dropdown-item" href="{{ route('register') }}">Create a new account</a>
                 </div>
             </div>
-            <a class="btn btn-primary btn-lg" href="{{ route('task.index') }}" role="button">Go to Tasks</a>
+            <a class="btn btn-primary btn-lg" href="{{ route('tasks.index') }}" role="button">Go to Tasks</a>
         </div>
     </div>
     </p>

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 use App\Status;
-use Carbon\Carbon;
 
 class StatusController extends Controller
 {
@@ -25,7 +24,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        $statuses = Status::paginate(10);
+        $statuses = Status::orderBy('id', 'desc')->paginate(10);
         return view('statuses', ['statuses' => $statuses]);
     }
 
@@ -77,7 +76,7 @@ class StatusController extends Controller
      */
     public function edit(Status $status)
     {
-        return view('edit_status', ['status' => $status]);
+        return view('edit_status', ['status' => Status::findOrFail($status->id)]);
     }
 
     /**
@@ -90,12 +89,8 @@ class StatusController extends Controller
     public function update(Request $request, Status $status)
     {
         if ($this->validator($request, $status)) {
-            $status->update(
-                [
-                    'name' => $request->input('name')
-                ]
-            );
-
+            $status->fill($request->all());
+            $status->save();
             flash('Successfully updated task status')->success();
         } else {
             flash('Failed to updated task status')->error();
@@ -115,7 +110,7 @@ class StatusController extends Controller
         $status->delete();
         flash('Task status removed')->warning();
 
-        return redirect()->route('status.index');
+        return redirect()->route('statuses.index');
     }
 
     /**

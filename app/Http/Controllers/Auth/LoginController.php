@@ -31,7 +31,7 @@ class LoginController extends Controller
     {
         $name = Auth::user()->name;
         flash("Hello {$name}! You are logged in.")->success();
-        return '/task';
+        return '/tasks';
     }
 
     /**

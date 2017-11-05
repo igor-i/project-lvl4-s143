@@ -22,7 +22,7 @@ class StatusesTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-            ->get('/status')
+            ->get('/statuses')
             ->assertStatus(200);
     }
 
@@ -36,14 +36,14 @@ class StatusesTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user)
-            ->get('/status/create')
+            ->get('/statuses/create')
             ->assertStatus(200);
 
         $status = factory(Status::class)->make();
 
-        $this->post("/status", [
+        $this->post("/statuses", [
             'name' => $status->name,
-        ])->assertRedirect('/status/create');
+        ])->assertRedirect('/statuses/create');
 
         $this->assertDatabaseHas('TaskStatuses', [
             'name' => $status->name
@@ -63,14 +63,14 @@ class StatusesTest extends TestCase
         $newStatus = factory(Status::class)->make();
 
         $this->actingAs($user)
-            ->get("/status/{$status->id}/edit")
+            ->get("/statuses/{$status->id}/edit")
             ->assertStatus(200);
 
-        $this->post("/status/{$status->id}", [
+        $this->post("/statuses/{$status->id}", [
             'name' => $newStatus->name,
             '_method' => 'PATCH',
             '_token' => csrf_token()
-        ])->assertRedirect("/status/{$status->id}/edit");
+        ])->assertRedirect("/statuses/{$status->id}/edit");
 
         $this->assertDatabaseHas('TaskStatuses', [
             'name' => $newStatus->name
@@ -88,10 +88,10 @@ class StatusesTest extends TestCase
         $status = Status::first();
 
         $this->actingAs($user)
-            ->get("/status/{$status->id}/edit")
+            ->get("/statuses/{$status->id}/edit")
             ->assertStatus(200);
 
-        $this->post("/status/{$status->id}", [
+        $this->post("/statuses/{$status->id}", [
             '_method' => 'DELETE',
             '_token' => csrf_token()
         ]);

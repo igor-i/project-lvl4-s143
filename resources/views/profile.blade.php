@@ -8,7 +8,7 @@
             <h4 class="card-title"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ $user->name }}</h4>
             <h6 class="card-subtitle mb-2 text-muted">Edit your profile information</h6>
             <p class="card-text">
-            <form method="POST" action="{{ route('user.update', Auth::user()->id) }}">
+            <form method="POST" action="{{ route('users.update', Auth::user()->id) }}">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
 
@@ -56,13 +56,13 @@
                     <button type="submit" class="btn btn-primary">
                         Submit
                     </button>
-                    <a type="button" class="btn btn-light" role="button" href="{{ route('user.index') }}">
+                    <a type="button" class="btn btn-light" role="button" href="{{ route('users.index') }}">
                         Cancel
                     </a>
                 </div>
             </form>
 
-            <form method="POST" id="delete-form" action="{{ route('user.destroy', Auth::user()->id) }}">
+            <form method="POST" id="delete-form" action="{{ route('users.destroy', Auth::user()->id) }}">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <p>

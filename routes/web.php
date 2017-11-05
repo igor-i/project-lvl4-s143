@@ -14,7 +14,7 @@
 Route::get('/', function () {
 //    \Log::debug('Here is some debug information');
     if (Auth::check()) {
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     } else {
         return redirect()->route('welcome.index');
     }
@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/welcome', function () {
     if (Auth::check()) {
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     } else {
         return view('welcome');
     }
@@ -31,8 +31,8 @@ Route::get('/welcome', function () {
 Auth::routes();
 
 Route::resources([
-    '/task' => 'TaskController',
-    '/user' => 'UserController',
-    '/status' => 'StatusController',
-    '/tag' => 'TagController'
+    '/tasks' => 'TaskController',
+    '/users' => 'UserController',
+    '/statuses' => 'StatusController',
+    '/tags' => 'TagController'
 ]);

@@ -30,6 +30,6 @@ class LoginTest extends TestCase
 //            'email' => $user->email,
 //            'password' => $user->password,
 //            '_token' => csrf_token()
-//        ])->assertRedirect('/task');
+//        ])->assertRedirect('/tasks');
 //    }
 }

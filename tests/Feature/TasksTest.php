@@ -16,7 +16,7 @@ class TasksTest extends TestCase
      */
     public function testApplication()
     {
-        $this->get('/task')
+        $this->get('/tasks')
             ->assertStatus(200);
     }
 }

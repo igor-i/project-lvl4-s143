@@ -9,7 +9,7 @@
 
             <nav class="navbar navbar-light bg-light justify-content-between">
                 <form class="form-inline">
-                    <a class="btn btn-sm btn-outline-success" href="{{ route('status.create') }}" role="button">
+                    <a class="btn btn-sm btn-outline-success" href="{{ route('statuses.create') }}" role="button">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         Add new status
                     </a>
@@ -36,7 +36,7 @@
                         <tr>
                             <th scope="row">{{ $statuses->firstItem() + $key }}</th>
                             <td>{{ $status->id }}</td>
-                            <td><a href="{{ route('status.edit', $status->id) }}">{{ $status->name }}</a></td>
+                            <td><a href="{{ route('statuses.edit', $status->id) }}">{{ $status->name }}</a></td>
                             <td>{{ $status->created_at }}</td>
                             <td>{{ $status->updated_at }}</td>
                         </tr>

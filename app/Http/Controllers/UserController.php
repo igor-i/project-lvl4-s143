@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 use App\User;
-use Carbon\Carbon;
 
 class UserController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * UserController constructor.
      */
     public function __construct()
     {
@@ -23,7 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::orderBy('id', 'desc')->paginate(10);
         return view('users')->with('users', $users);
     }
 
@@ -56,9 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //$user = $this->users->find($id);
-
-//        return view('user.profile', ['user' => $user]);
+        //
     }
 
     /**
@@ -69,7 +66,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('profile', ['user' => $user]);
+        return view('profile', ['user' => User::findOrFail($user->id)]);
     }
 
     /**
@@ -82,15 +79,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         if ($this->validator($request, $user)) {
-            $user->update(
-                [
-                    'name' => $request->input('name'),
-                    'email' => $request->input('email'),
-                    'password' => bcrypt($request->input('password')),
-                    'updated_at' => Carbon::now()
-                ]
-            );
-
+            $user->fill($request->all());
+            $user->save();
             flash('Successfully updated user profile')->success();
         } else {
             flash('Failed to update user profile')->error();

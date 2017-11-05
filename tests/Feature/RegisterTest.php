@@ -30,7 +30,7 @@ class RegisterTest extends TestCase
             'password' => '111111',
             'password_confirmation' => '111111',
             '_token' => csrf_token()
-        ])->assertRedirect('/task');
+        ])->assertRedirect('/tasks');
 
         $this->assertDatabaseHas('users', [
             'email' => 'test@test.io'
