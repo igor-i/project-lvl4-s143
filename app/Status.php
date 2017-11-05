@@ -12,4 +12,13 @@ class Status extends Model
      * @var string
      */
     protected $table = 'TaskStatuses';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name'
+    ];
 }

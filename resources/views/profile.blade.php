@@ -14,10 +14,10 @@
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value=" {{ $user->name }}" required autofocus>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required autofocus>
 
                     @if ($errors->has('name'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('name') }}</strong>
                         </span>
                     @endif
@@ -26,11 +26,11 @@
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                           placeholder="Enter email" value=" {{ $user->email }}" required autofocus>
+                           placeholder="Enter email" value="{{ $user->email }}" required autofocus>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 
                     @if ($errors->has('email'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                     @endif
@@ -41,7 +41,7 @@
                     <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
 
                     @if ($errors->has('password'))
-                        <span class="help-block">
+                        <span class="help-block text-danger">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                     @endif
@@ -56,6 +56,9 @@
                     <button type="submit" class="btn btn-primary">
                         Submit
                     </button>
+                    <a type="button" class="btn btn-light" role="button" href="{{ route('user.index') }}">
+                        Cancel
+                    </a>
                 </div>
             </form>
 

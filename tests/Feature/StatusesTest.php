@@ -55,49 +55,49 @@ class StatusesTest extends TestCase
      *
      * @return void
      */
-//    public function testUpdateStatus()
-//    {
-//        $user = factory(User::class)->create();
-//
-//        $status = Status::first();
-//        $newStatus = factory(Status::class)->make();
-//
-//        $this->actingAs($user)
-//            ->get("/status/{$status->id}/edit")
-//            ->assertStatus(200);
-//
-//        $this->post("/status/{$status->id}", [
-//            'name' => $newStatus->name,
-//            '_method' => 'PATCH',
-//            '_token' => csrf_token()
-//        ])->assertRedirect("/status/{$status->id}/edit");
-//
-//        $this->assertDatabaseHas('TaskStatuses', [
-//            'name' => $newStatus->name
-//        ]);
-//    }
+    public function testUpdateStatus()
+    {
+        $user = factory(User::class)->create();
+
+        $status = Status::first();
+        $newStatus = factory(Status::class)->make();
+
+        $this->actingAs($user)
+            ->get("/status/{$status->id}/edit")
+            ->assertStatus(200);
+
+        $this->post("/status/{$status->id}", [
+            'name' => $newStatus->name,
+            '_method' => 'PATCH',
+            '_token' => csrf_token()
+        ])->assertRedirect("/status/{$status->id}/edit");
+
+        $this->assertDatabaseHas('TaskStatuses', [
+            'name' => $newStatus->name
+        ]);
+    }
 
     /**
      * Delete status
      *
      * @return void
      */
-//    public function testDeleteStatus()
-//    {
-//        $user = factory(User::class)->create();
-//        $status = Status::first();
-//
-//        $this->actingAs($user)
-//            ->get("/status/{$status->id}/edit")
-//            ->assertStatus(200);
-//
-//        $this->post("/status/{$status->id}", [
-//            '_method' => 'DELETE',
-//            '_token' => csrf_token()
-//        ]);
-//
-//        $this->assertDatabaseMissing('TaskStatuses', [
-//            'id' => $status->id
-//        ]);
-//    }
+    public function testDeleteStatus()
+    {
+        $user = factory(User::class)->create();
+        $status = Status::first();
+
+        $this->actingAs($user)
+            ->get("/status/{$status->id}/edit")
+            ->assertStatus(200);
+
+        $this->post("/status/{$status->id}", [
+            '_method' => 'DELETE',
+            '_token' => csrf_token()
+        ]);
+
+        $this->assertDatabaseMissing('TaskStatuses', [
+            'id' => $status->id
+        ]);
+    }
 }

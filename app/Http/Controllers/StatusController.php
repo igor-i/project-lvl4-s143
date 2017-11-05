@@ -77,7 +77,7 @@ class StatusController extends Controller
      */
     public function edit(Status $status)
     {
-        return view('status.edit', ['status' => $status]);
+        return view('edit_status', ['status' => $status]);
     }
 
     /**
@@ -92,7 +92,7 @@ class StatusController extends Controller
         if ($this->validator($request, $status)) {
             $status->update(
                 [
-                    'name' => $request->input('name'),
+                    'name' => $request->input('name')
                 ]
             );
 

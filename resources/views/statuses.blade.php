@@ -36,7 +36,7 @@
                         <tr>
                             <th scope="row">{{ $statuses->firstItem() + $key }}</th>
                             <td>{{ $status->id }}</td>
-                            <td>{{ $status->name }}</td>
+                            <td><a href="{{ route('status.edit', $status->id) }}">{{ $status->name }}</a></td>
                             <td>{{ $status->created_at }}</td>
                             <td>{{ $status->updated_at }}</td>
                         </tr>
