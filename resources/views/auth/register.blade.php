@@ -52,9 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Register
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="Register" data-disable-with="Registering...">
                 </div>
             </form>
             </p>

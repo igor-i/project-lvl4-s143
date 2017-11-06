@@ -31,8 +31,8 @@
         </p>
         <h1 class="display-3">Task Manager</h1>
         <p class="lead">This is a simple task management system.
-            The project in <a href="https://hexlet.io" target="_blank">Hexlet.io</a>
-            <sup><small><i class="fa fa-external-link" aria-hidden="true"></i></small></sup>.</p>
+            The project in <a href="https://hexlet.io" target="_blank">Hexlet.io</a>.
+            <sup><small><i class="fa fa-external-link" aria-hidden="true"></i></small></sup></p>
         <hr class="my-4">
         <p>
             Main features:

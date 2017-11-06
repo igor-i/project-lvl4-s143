@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <input type="submit" class="btn btn-primary" value="Login" data-disable-with="Authenticating...">
                     <a class="btn btn-link" href="{{ route('password.request') }}">Forgot Your Password?</a>
                 </div>
 

@@ -24,23 +24,16 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" href="#">
-                        Edit
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="Edit" data-disable-with="Saving...">
                     <a type="button" class="btn btn-light" role="button" href="{{ route('statuses.index') }}">
                         Cancel
                     </a>
                 </div>
             </form>
-            <form method="POST" id="delete-form" action="{{ route('statuses.destroy', $status->id) }}">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <p>
-                    <a href="#" class="text-danger"
-                       onclick="document.getElementById('delete-form').submit();">Delete status
-                    </a>
-                </p>
-            </form>
+            </p>
+            <p>
+                <a href="{{ route('statuses.destroy', $status->id) }}" class="text-danger" rel="nofollow"
+                   data-method="delete" data-confirm="Are you sure you want to delete status?">Delete status</a>
             </p>
         </div>
     </div>

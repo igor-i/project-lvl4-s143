@@ -23,9 +23,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" href="#">
-                        Create
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="Create" data-disable-with="Creating...">
                     <a type="button" class="btn btn-light" role="button" href="{{ route('statuses.index') }}">
                         Cancel
                     </a>

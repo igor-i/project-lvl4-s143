@@ -53,25 +53,16 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Submit
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="Edit" data-disable-with="Saving...">
                     <a type="button" class="btn btn-light" role="button" href="{{ route('users.index') }}">
                         Cancel
                     </a>
                 </div>
             </form>
-
-            <form method="POST" id="delete-form" action="{{ route('users.destroy', Auth::user()->id) }}">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <p>
-                    <a href="#" class="text-danger"
-                       onclick="document.getElementById('delete-form').submit();">Delete account
-                    </a>
-                </p>
-            </form>
-
+            </p>
+            <p>
+                <a href="{{ route('users.destroy', Auth::user()->id) }}" class="text-danger" rel="nofollow"
+                   data-method="delete" data-confirm="Are you sure you want to delete your account?">Delete account</a>
             </p>
         </div>
     </div>

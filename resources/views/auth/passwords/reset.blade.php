@@ -48,9 +48,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Reset Password
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="Reset Password" data-disable-with="Resetting...">
                 </div>
 
             </form>

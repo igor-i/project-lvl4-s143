@@ -12,6 +12,7 @@ try {
     window.Popper = require('popper.js');
 
     require('bootstrap');
+    require('jquery-ujs');
 } catch (e) {}
 
 /**

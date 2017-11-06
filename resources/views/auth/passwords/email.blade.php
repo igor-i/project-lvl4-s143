@@ -29,9 +29,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Send Password Reset Link
-                    </button>
+                    <input type="submit" class="btn btn-primary" value="Send Password Reset Link" data-disable-with="Sending...">
                 </div>
             </form>
             </p>

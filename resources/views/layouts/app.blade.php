@@ -7,6 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-param" content="_token" />
 
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
@@ -81,14 +82,10 @@
                             Your profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a href="{{ route('logout') }}" class="dropdown-item" rel="nofollow" data-method="post">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             Logout
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
                     </div>
                 </li>
                 @endguest
