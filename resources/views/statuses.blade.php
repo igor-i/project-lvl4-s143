@@ -14,9 +14,21 @@
                         Add new status
                     </a>
                 </form>
-                <form class="form-inline">
-                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                <form class="form-inline" method="get" href="{{ route('statuses.index') }}">
+                    <div class="input-group">
+                        <input class="form-control form-control-sm" type="search" placeholder="Search"
+                               aria-label="Search" name="name" value="{{ Request::input('name') }}">
+                        @if(Request::input('name') !== null)
+                        <span class="input-group-btn">
+                            <a class="btn btn-sm btn-outline-danger" type="button" href="{{ route('statuses.index') }}">
+                                <i class="fa fa-ban" aria-hidden="true"></i>
+                            </a>
+                        </span>
+                        @endif
+                    </div>
+
+                    <input type="submit" class="btn btn-sm btn-outline-secondary ml-sm-2 my-2 my-sm-0"
+                           value="Search" data-disable-with="Searching...">
                 </form>
             </nav>
 

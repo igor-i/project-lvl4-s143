@@ -2,10 +2,13 @@
 
 namespace App;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
+    use Filterable;
+
     /**
      * The table associated with the model.
      *
@@ -21,4 +24,9 @@ class Status extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function modelFilter()
+    {
+        return $this->provideFilter(ModelFilters\StatusFilter::class);
+    }
 }

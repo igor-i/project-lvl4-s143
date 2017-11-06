@@ -11,7 +11,8 @@
         "laravel/tinker": "~1.0",
         "rollbar/rollbar-laravel": "*",
         "csanquer/pdo-service-provider": "~1.1dev",
-        "laracasts/flash" : "*"
+        "laracasts/flash" : "*",
+        "tucker-eric/eloquentfilter" : "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
