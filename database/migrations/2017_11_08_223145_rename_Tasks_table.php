@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameTagsTable extends Migration
+class RenameTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class RenameTagsTable extends Migration
     public function up()
     {
         if (App::environment() === 'production') {
-            Schema::rename('Tags', 'tags');
+            Schema::rename('Tasks', 'tasks');
         }
     }
 
@@ -25,7 +25,7 @@ class RenameTagsTable extends Migration
     public function down()
     {
         if (App::environment() === 'production') {
-            Schema::rename('tags', 'Tags');
+            Schema::rename('tasks', 'Tasks');
         }
     }
 }
