@@ -13,9 +13,7 @@ class RenameTaskStatusesTable extends Migration
      */
     public function up()
     {
-        if (App::environment() === 'production') {
-            Schema::rename('TaskStatuses', 'task_statuses');
-        }
+        Schema::rename('TaskStatuses', 'task_statuses');
     }
 
     /**
@@ -25,8 +23,6 @@ class RenameTaskStatusesTable extends Migration
      */
     public function down()
     {
-        if (App::environment() === 'production') {
-            Schema::rename('task_statuses', 'TaskStatuses');
-        }
+        Schema::rename('task_statuses', 'TaskStatuses');
     }
 }

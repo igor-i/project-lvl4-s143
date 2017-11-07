@@ -12,9 +12,7 @@ class RenameTagMapTable extends Migration
      */
     public function up()
     {
-        if (App::environment() === 'production') {
-            Schema::rename('TagMap', 'tag_map');
-        }
+        Schema::rename('TagMap', 'tag_map');
     }
 
     /**
@@ -24,8 +22,6 @@ class RenameTagMapTable extends Migration
      */
     public function down()
     {
-        if (App::environment() === 'production') {
-            Schema::rename('tag_map', 'TagMap');
-        }
+        Schema::rename('tag_map', 'TagMap');
     }
 }
