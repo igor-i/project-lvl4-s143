@@ -92,9 +92,9 @@ class StatusController extends Controller
         if ($this->validator($request, $status)) {
             $status->fill($request->all());
             $status->save();
-            flash('Successfully updated task status')->success();
+            flash("Successfully updated '{$status->name}' task status")->success();
         } else {
-            flash('Failed to updated task status')->error();
+            flash("Failed to updated '{$status->name}' task status")->error();
         }
 
         return redirect()->back();

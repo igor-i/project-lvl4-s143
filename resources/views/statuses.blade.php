@@ -32,37 +32,36 @@
                 </form>
             </nav>
 
-            @if ($statuses->count() > 0)
-                <table class="table table-striped table-sm">
-                    <thead>
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>created_at</th>
+                    <th>updated_at</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($statuses as $key => $status)
                     <tr>
-                        <th>#</th>
-                        <th>id</th>
-                        <th>name</th>
-                        <th>created_at</th>
-                        <th>updated_at</th>
+                        <th scope="row">{{ $statuses->firstItem() + $key }}</th>
+                        <td>{{ $status->id }}</td>
+                        <td><a href="{{ route('statuses.edit', $status->id) }}">{{ $status->name }}</a></td>
+                        <td>{{ $status->created_at }}</td>
+                        <td>{{ $status->updated_at }}</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($statuses as $key => $status)
-                        <tr>
-                            <th scope="row">{{ $statuses->firstItem() + $key }}</th>
-                            <td>{{ $status->id }}</td>
-                            <td><a href="{{ route('statuses.edit', $status->id) }}">{{ $status->name }}</a></td>
-                            <td>{{ $status->created_at }}</td>
-                            <td>{{ $status->updated_at }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                @endforeach
+                </tbody>
+            </table>
 
-                <p>
-                    <nav aria-label="Statuses navigation">
-                        {{ $statuses->links('vendor/pagination/bootstrap-4') }}
-                    </nav>
-                </p>
+            <p>
+                <nav aria-label="Statuses navigation">
+                    {{ $statuses->links('vendor/pagination/bootstrap-4') }}
+                </nav>
+            </p>
 
-            @else
+            @if ($statuses->count() == 0)
                 <p>...there is no statuses</p>
             @endif
 

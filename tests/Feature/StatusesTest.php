@@ -100,4 +100,26 @@ class StatusesTest extends TestCase
             'id' => $status->id
         ]);
     }
+
+    /**
+     * Filtered status
+     */
+    public function testFilterStatus()
+    {
+        $user = factory(User::class)->create();
+
+        $response1 = $this->actingAs($user)
+            ->get("/statuses?name=todo")
+            ->assertViewHas('statuses');
+
+        $count1 = count($response1->original->getData()['statuses']);
+
+        factory(Status::class)->create(['name' => 'someonetodo']);
+
+        $response2 = $this->actingAs($user)
+            ->get("/statuses?name=todo")
+            ->assertViewHas('statuses');
+
+        $this->assertCount($count1 + 1, $response2->original->getData()['statuses']);
+    }
 }

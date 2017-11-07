@@ -7,7 +7,6 @@
     <div>
         <h1 class="display-4">Users</h1>
 
-        @if ($users->count() > 0)
         <table class="table table-striped table-sm">
             <thead>
             <tr>
@@ -42,7 +41,7 @@
             </nav>
         </p>
 
-        @else
+        @if ($users->count() == 0)
             <p>...there is no users</p>
         @endif
 

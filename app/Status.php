@@ -25,6 +25,9 @@ class Status extends Model
         'name'
     ];
 
+    /**
+     * @return \EloquentFilter\ModelFilter
+     */
     public function modelFilter()
     {
         return $this->provideFilter(ModelFilters\StatusFilter::class);
