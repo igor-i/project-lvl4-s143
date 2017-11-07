@@ -25,7 +25,7 @@ class TagController extends Controller
      */
     public function index(Request $request)
     {
-        $tags = Tag::filter($request->all())->orderBy('id', 'desc')->paginateFilter(10);
+        $tags = Tag::filter($request->all())->orderByDesc('id')->paginateFilter(10);
         return view('tags', compact('tags'));
     }
 
