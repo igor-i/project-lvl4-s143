@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 
-class InsertIntoTagsTable extends Migration
+class RenameTagsTable extends Migration
 {
     /**
      * Run the migrations.
