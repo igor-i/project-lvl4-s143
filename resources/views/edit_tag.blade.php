@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Edit status')
+@section('title', 'Edit tag')
 
 @section('content')
+    <h1 class="display-4">Tags</h1>
+
     <div class="card" style="width: 30rem;">
         <div class="card-body">
             <h4 class="card-title">Edit tag</h4>
