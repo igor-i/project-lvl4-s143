@@ -2,12 +2,14 @@
 
 namespace App;
 
+use EloquentFilter\Filterable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \EloquentFilter\ModelFilter
+     */
+    public function modelFilter()
+    {
+        return $this->provideFilter(ModelFilters\UserFilter::class);
+    }
 }

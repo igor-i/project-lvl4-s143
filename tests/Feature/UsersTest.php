@@ -78,4 +78,28 @@ class UsersTest extends TestCase
             'email' => $user->email
         ]);
     }
+
+    /**
+     * Filtered user
+     */
+    public function testFilterUser()
+    {
+        $user = factory(User::class)->create();
+
+        $response1 = $this->actingAs($user)
+            ->get("/users?name=test")
+            ->assertViewHas('users');
+
+        $count = count($response1->original->getData()['users']);
+
+        factory(User::class)->create(['name' => 'test']);
+        factory(User::class)->create(['name' => 'onemoretest']);
+        factory(User::class)->create(['name' => 'someelse']);
+
+        $response2 = $this->actingAs($user)
+            ->get("/users?name=test")
+            ->assertViewHas('users');
+
+        $this->assertCount($count + 2, $response2->original->getData()['users']);
+    }
 }

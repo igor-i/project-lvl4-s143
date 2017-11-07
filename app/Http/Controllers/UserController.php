@@ -18,12 +18,15 @@ class UserController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * Display a listing of the resource
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'desc')->paginate(10);
-        return view('users')->with('users', $users);
+        $users = User::filter($request->all())->orderBy('id', 'desc')->paginateFilter(10);
+        return view('users', compact('users'));
     }
 
     /**
