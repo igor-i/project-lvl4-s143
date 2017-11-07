@@ -1,12 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
-use Illuminate\Support\Facades\DB;
-
-use Carbon\Carbon;
 
 class InsertIntoTagsTable extends Migration
 {
@@ -17,10 +12,7 @@ class InsertIntoTagsTable extends Migration
      */
     public function up()
     {
-        DB::table('Tags')->insert([
-            ['name' => 'bug', 'created_at' => Carbon::now()],
-            ['name' => 'feature', 'created_at' => Carbon::now()]
-        ]);
+        Schema::rename('Tags', 'tags');
     }
 
     /**
@@ -30,6 +22,6 @@ class InsertIntoTagsTable extends Migration
      */
     public function down()
     {
-        DB::table('Tags')->delete()->all();
+        Schema::rename('tags', 'tags');
     }
 }
