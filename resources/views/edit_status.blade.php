@@ -3,6 +3,8 @@
 @section('title', 'Edit status')
 
 @section('content')
+    <h1 class="display-4">Statuses</h1>
+
     <div class="card" style="width: 30rem;">
         <div class="card-body">
             <h4 class="card-title">Edit status</h4>

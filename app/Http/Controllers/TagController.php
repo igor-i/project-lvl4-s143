@@ -26,7 +26,7 @@ class TagController extends Controller
     public function index(Request $request)
     {
         $tags = Tag::filter($request->all())->orderByDesc('id')->paginateFilter(10);
-//        return view('tags', compact('tags'));
+        return view('tags', compact('tags'));
     }
 
     /**
@@ -126,7 +126,7 @@ class TagController extends Controller
                 'required',
                 'string',
                 'max:255',
-                $tag ? Rule::unique('Tags')->ignore($tag->id) : 'unique:Tags'
+                $tag ? Rule::unique('tags')->ignore($tag->id) : 'unique:tags'
             ],
         ]);
     }

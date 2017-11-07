@@ -126,7 +126,7 @@ class StatusController extends Controller
                 'required',
                 'string',
                 'max:255',
-                $status ? Rule::unique('TaskStatuses')->ignore($status->id) : 'unique:TaskStatuses'
+                $status ? Rule::unique('task_statuses')->ignore($status->id) : 'unique:task_statuses'
             ],
         ]);
     }

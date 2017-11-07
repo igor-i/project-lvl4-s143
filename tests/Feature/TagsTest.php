@@ -44,7 +44,7 @@ class TagsTest extends TestCase
             'name' => $tag->name,
         ])->assertRedirect('/tags/create');
 
-        $this->assertDatabaseHas('Tags', [
+        $this->assertDatabaseHas('tags', [
             'name' => $tag->name
         ]);
     }
@@ -70,7 +70,7 @@ class TagsTest extends TestCase
             '_token' => csrf_token()
         ])->assertRedirect("/tags/{$tag->id}/edit");
 
-        $this->assertDatabaseHas('Tags', [
+        $this->assertDatabaseHas('tags', [
             'name' => $newTag->name
         ]);
     }
@@ -94,7 +94,7 @@ class TagsTest extends TestCase
             '_token' => csrf_token()
         ]);
 
-        $this->assertDatabaseMissing('Tags', [
+        $this->assertDatabaseMissing('tags', [
             'id' => $tag->id
         ]);
     }

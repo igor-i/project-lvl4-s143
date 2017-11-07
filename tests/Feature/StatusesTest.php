@@ -45,7 +45,7 @@ class StatusesTest extends TestCase
             'name' => $status->name,
         ])->assertRedirect('/statuses/create');
 
-        $this->assertDatabaseHas('TaskStatuses', [
+        $this->assertDatabaseHas('task_statuses', [
             'name' => $status->name
         ]);
     }
@@ -72,7 +72,7 @@ class StatusesTest extends TestCase
             '_token' => csrf_token()
         ])->assertRedirect("/statuses/{$status->id}/edit");
 
-        $this->assertDatabaseHas('TaskStatuses', [
+        $this->assertDatabaseHas('task_statuses', [
             'name' => $newStatus->name
         ]);
     }
@@ -96,7 +96,7 @@ class StatusesTest extends TestCase
             '_token' => csrf_token()
         ]);
 
-        $this->assertDatabaseMissing('TaskStatuses', [
+        $this->assertDatabaseMissing('task_statuses', [
             'id' => $status->id
         ]);
     }
