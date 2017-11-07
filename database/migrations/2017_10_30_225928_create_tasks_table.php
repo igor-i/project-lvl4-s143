@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagMapTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateTagMapTable extends Migration
      */
     public function up()
     {
-        Schema::create('TagMap', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tag');
-            $table->integer('task');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->integer('status')->default(1);
+            $table->integer('creator');
+            $table->integer('assignedTo')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateTagMapTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('TagMap');
+        Schema::dropIfExists('tasks');
     }
 }

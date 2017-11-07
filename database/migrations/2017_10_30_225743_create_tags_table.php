@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration
+use Carbon\Carbon;
+
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +15,16 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('Tasks', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->integer('status')->default(1);
-            $table->integer('creator');
-            $table->integer('assignedTo')->nullable();
+            $table->string('name')->unique();
             $table->timestamps();
         });
+
+        DB::table('tags')->insert([
+            ['name' => 'bug', 'created_at' => Carbon::now()],
+            ['name' => 'feature', 'created_at' => Carbon::now()]
+        ]);
     }
 
     /**
@@ -31,6 +34,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Tasks');
+        Schema::dropIfExists('tags');
     }
 }
