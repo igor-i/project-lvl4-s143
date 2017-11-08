@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagMapTable extends Migration
+class CreateTagTaskTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTagMapTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_map', function (Blueprint $table) {
+        Schema::create('tag_task', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tag_id');
             $table->integer('task_id');
