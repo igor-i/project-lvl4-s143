@@ -15,8 +15,8 @@ class CreateTagMapTable extends Migration
     {
         Schema::create('tag_map', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tag');
-            $table->integer('task');
+            $table->integer('tag_id');
+            $table->integer('task_id');
             $table->timestamps();
         });
     }
