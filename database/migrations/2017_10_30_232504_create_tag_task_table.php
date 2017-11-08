@@ -28,6 +28,6 @@ class CreateTagTaskTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_map');
+        Schema::dropIfExists('tag_task');
     }
 }

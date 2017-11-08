@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
 
-class CreateTaskStatusesTable extends Migration
+class CreateStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,13 +17,13 @@ class CreateTaskStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_statuses', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });
 
-        DB::table('task_statuses')->insert([
+        DB::table('statuses')->insert([
             ['name' => 'ToDo', 'created_at' => Carbon::now()],
             ['name' => 'Doing', 'created_at' => Carbon::now()],
             ['name' => 'Testing', 'created_at' => Carbon::now()],
@@ -38,6 +38,6 @@ class CreateTaskStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_statuses');
+        Schema::dropIfExists('statuses');
     }
 }
