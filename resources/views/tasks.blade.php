@@ -17,6 +17,7 @@
             </a>
         </form>
         <form class="form-inline" method="get" id="filters-form" href="{{ route('tasks.index') }}">
+            @auth
             <div>
                 <i class="fa fa-filter" aria-hidden="true"></i>
                 Quick filters:
@@ -24,43 +25,24 @@
             <div class="form-check form-check-inline ml-sm-2">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" id="filter-my-tasks"
-                           @auth
                            value="{{ Auth::user()->id }}"
-
                            @if (Auth::user()->id == Request::input('creator'))
                            checked
                            @endif
-
-                           @else
-
-                           @if (Request::input('creator') == 'on')
-                           checked
-                           @endif
-
-                           @endauth
                     > My tasks
                 </label>
             </div>
             <div class="form-check form-check-inline">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" id="filter-assigned-to-me"
-                           @auth
                            value="{{ Auth::user()->id }}"
-
                            @if (Auth::user()->id == Request::input('assignedto'))
                            checked
                            @endif
-
-                           @else
-
-                           @if (Request::input('assignedto') == 'on')
-                           checked
-                           @endif
-
-                           @endauth
                     > Assigned to Me
                 </label>
             </div>
+            @endauth
             <div class="input-group">
                 <input class="form-control form-control-sm" type="search" placeholder="Search by name and description"
                        aria-label="Search" name="fulltext" value="{{ Request::input('fulltext') }}">
