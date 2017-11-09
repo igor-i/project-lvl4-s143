@@ -111,5 +111,13 @@
         src="{{ secure_asset('/js/app.js') }}"
         @endif
 ></script>
+<script
+        @if (App::environment() === 'local')
+        src="{{ asset('/js/myscript.js') }}"
+        @else
+        src="{{ secure_asset('/js/myscript.js') }}"
+        @endif
+></script>
+
 </body>
 </html>

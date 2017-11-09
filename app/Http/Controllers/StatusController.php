@@ -47,14 +47,11 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->validator($request)) {
-            $status = new Status;
-            $status->name = $request->name;
-            $status->save();
-            flash("Successfully added new '{$request->name}' task status")->success();
-        } else {
-            flash("Failed to added new '{$request->name}' task status")->error();
-        }
+        $this->validator($request);
+        $status = new Status;
+        $status->name = $request->name;
+        $status->save();
+        flash("Successfully added new '{$request->name}' task status")->success();
 
         return redirect()->back();
     }
@@ -89,13 +86,10 @@ class StatusController extends Controller
      */
     public function update(Request $request, Status $status)
     {
-        if ($this->validator($request, $status)) {
-            $status->fill($request->all());
-            $status->save();
-            flash("Successfully updated '{$status->name}' task status")->success();
-        } else {
-            flash("Failed to updated '{$status->name}' task status")->error();
-        }
+        $this->validator($request, $status);
+        $status->fill($request->all());
+        $status->save();
+        flash("Successfully updated '{$status->name}' task status")->success();
 
         return redirect()->back();
     }
@@ -109,7 +103,7 @@ class StatusController extends Controller
     public function destroy(Status $status)
     {
         $status->delete();
-        flash('Task status removed')->warning();
+        flash("Task status '{$status->name}' removed")->warning();
 
         return redirect()->route('statuses.index');
     }
@@ -126,7 +120,7 @@ class StatusController extends Controller
                 'required',
                 'string',
                 'max:255',
-                $status ? Rule::unique('task_statuses')->ignore($status->id) : 'unique:task_statuses'
+                $status ? Rule::unique('statuses')->ignore($status->id) : 'unique:statuses'
             ],
         ]);
     }

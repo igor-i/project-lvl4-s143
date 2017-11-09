@@ -81,13 +81,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if ($this->validator($request, $user)) {
-            $user->fill($request->all());
-            $user->save();
-            flash('Successfully updated user profile')->success();
-        } else {
-            flash('Failed to update user profile')->error();
-        }
+        $this->validator($request, $user);
+        $user->fill($request->all());
+        $user->save();
+        flash('Successfully updated user profile')->success();
 
         return redirect()->back();
     }

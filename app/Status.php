@@ -10,13 +10,6 @@ class Status extends Model
     use Filterable;
 
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'task_statuses';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -31,5 +24,13 @@ class Status extends Model
     public function modelFilter()
     {
         return $this->provideFilter(ModelFilters\StatusFilter::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
     }
 }

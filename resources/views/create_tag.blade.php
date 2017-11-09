@@ -25,6 +25,52 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="color">Color</label>
+                    <select class="form-control" name="color" id="color">
+                        <option value="light"
+                                @if ("light" == old('color'))
+                                selected
+                                @endif
+                        >light</option>
+                        <option value="red"
+                                @if ("red" == old('color'))
+                                selected
+                                @endif
+                        >red</option>
+                        <option value="green"
+                                @if ("green" == old('color'))
+                                selected
+                                @endif
+                        >green</option>
+                        <option value="blue"
+                                @if ("blue" == old('color'))
+                                selected
+                                @endif
+                        >blue</option>
+                        <option value="grey"
+                                @if ("grey" == old('color'))
+                                selected
+                                @endif
+                        >grey</option>
+                        <option value="yellow"
+                                @if ("yellow" == old('color'))
+                                selected
+                                @endif
+                        >yellow</option>
+                        <option value="azure"
+                                @if ("azure" == old('color'))
+                                selected
+                                @endif
+                        >azure</option>
+                        <option value="black"
+                                @if ("black" == old('color'))
+                                selected
+                                @endif
+                        >black</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Create" data-disable-with="Creating...">
                     <a type="button" class="btn btn-light" role="button" href="{{ route('tags.index') }}">
                         Cancel

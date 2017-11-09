@@ -26,6 +26,52 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="color">Color</label>
+                    <select class="form-control" name="color" id="color">
+                        <option value="light"
+                                @if ("light" == $tag->color)
+                                selected
+                                @endif
+                        >light</option>
+                        <option value="red"
+                                @if ("red" == $tag->color)
+                                selected
+                                @endif
+                        >red</option>
+                        <option value="green"
+                                @if ("green" == $tag->color)
+                                selected
+                                @endif
+                        >green</option>
+                        <option value="blue"
+                                @if ("blue" == $tag->color)
+                                selected
+                                @endif
+                        >blue</option>
+                        <option value="grey"
+                                @if ("grey" == $tag->color)
+                                selected
+                                @endif
+                        >grey</option>
+                        <option value="yellow"
+                                @if ("yellow" == $tag->color)
+                                selected
+                                @endif
+                        >yellow</option>
+                        <option value="azure"
+                                @if ("azure" == $tag->color)
+                                selected
+                                @endif
+                        >azure</option>
+                        <option value="black"
+                                @if ("black" == $tag->color)
+                                selected
+                                @endif
+                        >black</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Edit" data-disable-with="Saving...">
                     <a type="button" class="btn btn-light" role="button" href="{{ route('tags.index') }}">
                         Cancel

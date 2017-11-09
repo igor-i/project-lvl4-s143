@@ -47,14 +47,12 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->validator($request)) {
-            $tag = new Tag;
-            $tag->name = $request->name;
-            $tag->save();
-            flash("Successfully added new '{$request->name}' tag")->success();
-        } else {
-            flash("Failed to added new '{$request->name}' tag")->error();
-        }
+        $this->validator($request);
+        $tag = new Tag;
+        $tag->name = $request->name;
+        $tag->color = $request->color;
+        $tag->save();
+        flash("Successfully added new '{$request->name}' tag")->success();
 
         return redirect()->back();
     }
@@ -89,13 +87,10 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        if ($this->validator($request, $tag)) {
-            $tag->fill($request->all());
-            $tag->save();
-            flash("Successfully updated '{$tag->name}' tag")->success();
-        } else {
-            flash("Failed to updated '{$tag->name}' tag")->error();
-        }
+        $this->validator($request, $tag);
+        $tag->fill($request->all());
+        $tag->save();
+        flash("Successfully updated '{$tag->name}' tag")->success();
 
         return redirect()->back();
     }
@@ -127,7 +122,7 @@ class TagController extends Controller
                 'string',
                 'max:255',
                 $tag ? Rule::unique('tags')->ignore($tag->id) : 'unique:tags'
-            ],
+            ]
         ]);
     }
 }

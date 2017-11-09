@@ -2,14 +2,14 @@
 
 use EloquentFilter\ModelFilter;
 
-class TagFilter extends ModelFilter
+class TaskFilter extends ModelFilter
 {
     /**
-    * Related Models that have ModelFilters as well as the method on the ModelFilter
-    * As [relationMethod => [input_key1, input_key2]].
-    *
-    * @var array
-    */
+     * Related Models that have ModelFilters as well as the method on the ModelFilter
+     * As [relationMethod => [input_key1, input_key2]].
+     *
+     * @var array
+     */
     public $relations = [];
 
     /**
@@ -19,5 +19,52 @@ class TagFilter extends ModelFilter
     public function name($name)
     {
         return $this->whereLike('name', $name);
+    }
+
+    /**
+     * @param $text
+     * @return $this
+     */
+    public function fulltext($text)
+    {
+        return $this
+            ->whereLike('name', $text)
+            ->orWhere('description', 'LIKE', "%$text%");
+    }
+
+    /**
+     * @param $status_id
+     * @return $this
+     */
+    public function status($status_id)
+    {
+        return $this->related('status', 'id', $status_id);
+    }
+
+    /**
+     * @param $user_id
+     * @return $this
+     */
+    public function creator($user_id)
+    {
+        return $this->related('creator', 'id', $user_id);
+    }
+
+    /**
+     * @param $user_id
+     * @return $this
+     */
+    public function assignedto($user_id)
+    {
+        return $this->related('assignedto', 'id', $user_id);
+    }
+
+    /**
+     * @param $tag_id
+     * @return $this
+     */
+    public function tag($tag_id)
+    {
+        return $this->related('tags', 'tag_id', [$tag_id]);
     }
 }

@@ -5,7 +5,7 @@ namespace App;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Task extends Model
 {
     use Filterable;
 
@@ -15,7 +15,7 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'description', 'status_id', 'creator_id', 'assignedto_id'
     ];
 
     /**
@@ -23,6 +23,38 @@ class Tag extends Model
      */
     public function modelFilter()
     {
-        return $this->provideFilter(ModelFilters\TagFilter::class);
+        return $this->provideFilter(ModelFilters\TaskFilter::class);
+    }
+
+    /**
+     * Get the status record associated with the task.
+     */
+    public function status()
+    {
+        return $this->belongsTo('App\Status')->withDefault();
+    }
+
+    /**
+     * Get the user record associated with the task.
+     */
+    public function creator()
+    {
+        return $this->belongsTo('App\User')->withDefault();
+    }
+
+    /**
+     * Get the user record associated with the task.
+     */
+    public function assignedto()
+    {
+        return $this->belongsTo('App\User')->withDefault();
+    }
+
+    /**
+     * The tags that belong to the task.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
     }
 }

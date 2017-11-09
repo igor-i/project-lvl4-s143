@@ -18,12 +18,14 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->string('color')->default('grey');
             $table->timestamps();
         });
 
         DB::table('tags')->insert([
-            ['name' => 'bug', 'created_at' => Carbon::now()],
-            ['name' => 'feature', 'created_at' => Carbon::now()]
+            ['name' => 'bug', 'color' => 'red', 'created_at' => Carbon::now()],
+            ['name' => 'feature', 'color' => 'green', 'created_at' => Carbon::now()],
+            ['name' => 'something', 'color' => 'azure', 'created_at' => Carbon::now()]
         ]);
     }
 

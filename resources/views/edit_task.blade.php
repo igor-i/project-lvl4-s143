@@ -1,25 +1,26 @@
 @extends('layouts.app')
 
-@section('title', 'Create task')
+@section('title', 'Edit task')
 
 @section('content')
     <h1 class="display-4">Tasks</h1>
 
     <div class="card" style="width: 50rem;">
         <div class="card-header">
-            <h4 class="card-title">Create task</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Create a new task</h6>
+            <h4 class="card-title">Edit task</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Edit a task information</h6>
             <p class="card-text">
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('tasks.store') }}">
+            <form method="POST" action="{{ route('tasks.update', $task->id) }}">
                 {{ csrf_field() }}
+                {{ method_field('PATCH') }}
 
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} row">
                     <label for="name" class="col-sm-2 col-form-label">Name*</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="name" name="name"
-                               value="{{ old('name') }}" required autofocus>
+                               value="{{ $task->name }}" required autofocus>
 
                         @if ($errors->has('name'))
                             <span class="help-block text-danger">
@@ -33,7 +34,7 @@
                     <label for="description" class="col-sm-2 col-form-label">Description</label>
                     <div class="col-sm-10">
                         <textarea type="text" class="form-control" id="description" name="description"
-                                  rows="3">{{ old('description') }}</textarea>
+                                  rows="3">{{ $task->description }}</textarea>
 
                         @if ($errors->has('description'))
                             <span class="help-block text-danger">
@@ -49,10 +50,10 @@
                         <select class="form-control" id="status" name="status" required>
                             @foreach ($statuses as $key => $status)
                                 <option value="{{ $status->id }}"
-                                        @if ($status->id == old('status'))
+                                        @if ($status->id == $task->status->id)
                                         selected
                                         @endif
-                                >{{ $status->name }}</option>
+                                        >{{ $status->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -68,8 +69,8 @@
                     <label for="creator" class="col-sm-2 col-form-label">Creator*</label>
                     <div class="col-sm-10">
                         <input class="form-control" type="text" id="creator"
-                               value="{{ Auth::user()->name }} ({{ Auth::user()->email }})" required readonly>
-                        <input type="hidden" name="creator" value="{{ Auth::user()->id }}">
+                               value="{{ $task->creator->name }} ({{ $task->creator->email }})" required readonly>
+                        <input type="hidden" name="creator" value="{{ $task->creator->id }}">
                     </div>
 
                     @if ($errors->has('creator'))
@@ -84,13 +85,13 @@
                     <div class="col-sm-10">
                         <select class="form-control" name="assignedto" id="assignedto">
                             <option
-                                    @if (null == old('assignedto'))
-                                    selected
-                                    @endif
+                            @if (empty($task->assignedto))
+                                selected
+                            @endif
                             ></option>
                             @foreach ($users as $key => $user)
                                 <option value="{{ $user->id }}"
-                                        @if ($user->id == old('assignedto'))
+                                        @if ($user->id == $task->assignedto->id)
                                         selected
                                         @endif
                                 >{{ $user->name }} ({{ $user->email }})</option>
@@ -111,17 +112,13 @@
                         <select multiple class="form-control" id="tag" name="tag[]">
                             @foreach ($tags as $key => $tag)
                                 <option value="{{ $tag->id }}"
-                                        @if (null != old('tag'))
+                                        @foreach ($task->tags as $taskTag)
 
-                                        @foreach (old('tag') as $oldTag)
-
-                                        @if ($tag->id == $oldTag)
+                                        @if ($tag->id == $taskTag->id)
                                         selected
                                         @endif
 
                                         @endforeach
-
-                                        @endif
                                 >{{ $tag->name }}</option>
                             @endforeach
                         </select>
@@ -137,10 +134,18 @@
                 <div class="form-group row">
                     <span class="col-sm-2"></span>
                     <div class="col-sm-10">
-                        <input type="submit" class="btn btn-primary" value="Create" data-disable-with="Creating...">
+                        <input type="submit" class="btn btn-primary" value="Edit" data-disable-with="Editing...">
                         <a type="button" class="btn btn-light" role="button" href="{{ route('tasks.index') }}">
                             Cancel
                         </a>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <span class="col-sm-2"></span>
+                    <div class="col-sm-10">
+                        <a href="{{ route('tasks.destroy', $task->id) }}" class="text-danger" rel="nofollow"
+                           data-method="delete" data-confirm="Are you sure you want to delete task?">Delete task</a>
                     </div>
                 </div>
             </form>

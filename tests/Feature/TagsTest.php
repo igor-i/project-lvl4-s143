@@ -42,10 +42,12 @@ class TagsTest extends TestCase
 
         $this->post("/tags", [
             'name' => $tag->name,
+            'color' => $tag->color
         ])->assertRedirect('/tags/create');
 
         $this->assertDatabaseHas('tags', [
-            'name' => $tag->name
+            'name' => $tag->name,
+            'color' => $tag->color
         ]);
     }
 

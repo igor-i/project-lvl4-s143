@@ -19,7 +19,7 @@ class CreateTasksTable extends Migration
             $table->text('description')->nullable();
             $table->integer('status_id')->default(1);
             $table->integer('creator_id');
-            $table->integer('assignedTo_id')->nullable();
+            $table->integer('assignedto_id')->nullable();
             $table->timestamps();
         });
     }

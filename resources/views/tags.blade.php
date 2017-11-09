@@ -35,6 +35,7 @@
         <tr>
             <th>#</th>
             <th>name</th>
+            <th>color</th>
             <th>created_at</th>
             <th>updated_at</th>
         </tr>
@@ -44,6 +45,44 @@
             <tr>
                 <th scope="row">{{ $tag->id }}</th>
                 <td><a href="{{ route('tags.edit', $tag->id) }}">{{ $tag->name }}</a></td>
+                <td>
+                    @switch($tag->color)
+                        @case('red')
+                        <span class="badge badge-danger">{{ $tag->name }}</span>
+                        @break
+
+                        @case('green')
+                        <span class="badge badge-success">{{ $tag->name }}</span>
+                        @break
+
+                        @case('blue')
+                        <span class="badge badge-primary">{{ $tag->name }}</span>
+                        @break
+
+                        @case('grey')
+                        <span class="badge badge-secondary">{{ $tag->name }}</span>
+                        @break
+
+                        @case('yellow')
+                        <span class="badge badge-warning">{{ $tag->name }}</span>
+                        @break
+
+                        @case('azure')
+                        <span class="badge badge-info">{{ $tag->name }}</span>
+                        @break
+
+                        @case('light')
+                        <span class="badge badge-light">{{ $tag->name }}</span>
+                        @break
+
+                        @case('black')
+                        <span class="badge badge-dark">{{ $tag->name }}</span>
+                        @break
+
+                        @default
+                        <span class="badge badge-light">{{ $tag->name }}</span>
+                    @endswitch
+                </td>
                 <td>{{ $tag->created_at }}</td>
                 <td>{{ $tag->updated_at }}</td>
             </tr>
