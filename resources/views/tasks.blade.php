@@ -31,6 +31,12 @@
                            checked
                            @endif
 
+                           @else
+
+                           @if (Request::input('creator') == 'on')
+                           checked
+                           @endif
+
                            @endauth
                     > My tasks
                 </label>
@@ -42,6 +48,12 @@
                            value="{{ Auth::user()->id }}"
 
                            @if (Auth::user()->id == Request::input('assignedto'))
+                           checked
+                           @endif
+
+                           @else
+
+                           @if (Request::input('assignedto') == 'on')
                            checked
                            @endif
 
