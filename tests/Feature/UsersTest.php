@@ -88,7 +88,7 @@ class UsersTest extends TestCase
 
         $response1 = $this->actingAs($user)
             ->get("/users?name=test")
-            ->assertViewHas('users');
+            ->assertStatus(200);
 
         $count = count($response1->original->getData()['users']);
 
@@ -98,7 +98,7 @@ class UsersTest extends TestCase
 
         $response2 = $this->actingAs($user)
             ->get("/users?name=test")
-            ->assertViewHas('users');
+            ->assertStatus(200);
 
         $this->assertCount($count + 2, $response2->original->getData()['users']);
     }

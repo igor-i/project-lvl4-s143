@@ -10,12 +10,12 @@
             <h4 class="card-title">Create tag</h4>
             <h6 class="card-subtitle mb-2 text-muted">Create a new tag</h6>
             <p class="card-text">
-            <form method="POST" action="{{ route('tags.store') }}">
-                {{ csrf_field() }}
 
+            {!! Form::open(['route' => ['tags.store']]) !!}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required autofocus>
+
+                    {!! Form::label('name', 'Name') !!}
+                    {!! Form::text('name', old('name'), ['class' => 'form-control', 'required', 'autofocus']) !!}
 
                     @if ($errors->has('name'))
                         <span class="help-block text-danger">
@@ -25,58 +25,39 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="color">Color</label>
-                    <select class="form-control" name="color" id="color">
-                        <option value="light"
-                                @if ("light" == old('color'))
-                                selected
-                                @endif
-                        >light</option>
-                        <option value="red"
-                                @if ("red" == old('color'))
-                                selected
-                                @endif
-                        >red</option>
-                        <option value="green"
-                                @if ("green" == old('color'))
-                                selected
-                                @endif
-                        >green</option>
-                        <option value="blue"
-                                @if ("blue" == old('color'))
-                                selected
-                                @endif
-                        >blue</option>
-                        <option value="grey"
-                                @if ("grey" == old('color'))
-                                selected
-                                @endif
-                        >grey</option>
-                        <option value="yellow"
-                                @if ("yellow" == old('color'))
-                                selected
-                                @endif
-                        >yellow</option>
-                        <option value="azure"
-                                @if ("azure" == old('color'))
-                                selected
-                                @endif
-                        >azure</option>
-                        <option value="black"
-                                @if ("black" == old('color'))
-                                selected
-                                @endif
-                        >black</option>
-                    </select>
+
+                    {!! Form::label('color', 'Color') !!}
+                    {!! Form::select(
+                            'color',
+                            [
+                                'light' => 'light',
+                                'red' => 'red',
+                                'green' => 'green',
+                                'blue' => 'blue',
+                                'grey' => 'grey',
+                                'yellow' => 'yellow',
+                                'azure' => 'azure',
+                                'black' => 'black'
+                            ],
+                            old('color'),
+                            ['placeholder' => 'Pick a color...']
+                        )
+                    !!}
+
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Create" data-disable-with="Creating...">
-                    <a type="button" class="btn btn-light" role="button" href="{{ route('tags.index') }}">
-                        Cancel
-                    </a>
+
+                    {!! Form::submit('Create', ['class' => 'btn btn-primary', 'data-disable-with' => 'Creating...']) !!}
+                    {!! link_to_route(
+                        'tags.index',
+                        $title = 'Cancel',
+                        $parameters = [],
+                        $attributes = ['class' => 'btn btn-light', 'type' => 'button', 'role' => 'button']) !!}
+
                 </div>
-            </form>
+            {!! Form::close() !!}
+
             </p>
         </div>
     </div>

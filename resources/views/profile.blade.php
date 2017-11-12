@@ -8,13 +8,12 @@
             <h4 class="card-title"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ $user->name }}</h4>
             <h6 class="card-subtitle mb-2 text-muted">Edit your profile information</h6>
             <p class="card-text">
-            <form method="POST" action="{{ route('users.update', Auth::user()->id) }}">
-                {{ csrf_field() }}
-                {{ method_field('PATCH') }}
 
+            {!! Form::model($user, ['route' => ['users.update', Auth::user()->id], 'method' => 'patch']) !!}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required autofocus>
+
+                    {!! Form::label('name', 'Name') !!}
+                    {!! Form::text('name', $user->name, ['class' => 'form-control', 'required', 'autofocus']) !!}
 
                     @if ($errors->has('name'))
                         <span class="help-block text-danger">
@@ -24,9 +23,14 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                           placeholder="Enter email" value="{{ $user->email }}" required>
+
+                    {!! Form::label('email', 'Email address') !!}
+                    {!! Form::text(
+                            'email',
+                            $user->email,
+                            ['class' => 'form-control', 'aria-describedby' => 'emailHelp', 'placeholder' => 'Enter email', 'required']
+                        )
+                    !!}
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 
                     @if ($errors->has('email'))
@@ -37,8 +41,9 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+
+                    {!! Form::label('password', 'Password') !!}
+                    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'required']) !!}
 
                     @if ($errors->has('password'))
                         <span class="help-block text-danger">
@@ -48,17 +53,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password-confirm">Confirm Password</label>
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+
+                    {!! Form::label('password_confirmation', 'Confirm Password') !!}
+                    {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Password', 'required']) !!}
+
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Edit" data-disable-with="Saving...">
-                    <a type="button" class="btn btn-light" role="button" href="{{ route('users.index') }}">
-                        Cancel
-                    </a>
+
+                    {!! Form::submit('Edit', ['class' => 'btn btn-primary', 'data-disable-with' => 'Saving...']) !!}
+                    {!! link_to_route(
+                        'users.index',
+                        $title = 'Cancel',
+                        $parameters = [],
+                        $attributes = ['class' => 'btn btn-light', 'type' => 'button', 'role' => 'button']) !!}
                 </div>
-            </form>
+
             </p>
             <p>
                 <a href="{{ route('users.destroy', Auth::user()->id) }}" class="text-danger" rel="nofollow"

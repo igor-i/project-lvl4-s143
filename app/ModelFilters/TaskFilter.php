@@ -36,7 +36,7 @@ class TaskFilter extends ModelFilter
      * @param $status_id
      * @return $this
      */
-    public function status($status_id)
+    public function statusId($status_id)
     {
         return $this->related('status', 'id', $status_id);
     }
@@ -45,7 +45,7 @@ class TaskFilter extends ModelFilter
      * @param $user_id
      * @return $this
      */
-    public function creator($user_id)
+    public function creatorId($user_id)
     {
         return $this->related('creator', 'id', $user_id);
     }
@@ -54,7 +54,7 @@ class TaskFilter extends ModelFilter
      * @param $user_id
      * @return $this
      */
-    public function assignedto($user_id)
+    public function assignedtoId($user_id)
     {
         return $this->related('assignedto', 'id', $user_id);
     }
@@ -63,7 +63,7 @@ class TaskFilter extends ModelFilter
      * @param $tag_id
      * @return $this
      */
-    public function tag($tag_id)
+    public function tagId($tag_id)
     {
         return $this->related('tags', 'tag_id', [$tag_id]);
     }

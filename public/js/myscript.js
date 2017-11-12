@@ -1,18 +1,18 @@
 // Быстрые фиьтры: "My tasks" и "Assigned to Me"
 jQuery('#filter-assigned-to-me').change(function () {
     if (jQuery(this).prop("checked")) {
-        jQuery('[data-filter-name = assignedto]').val(jQuery(this).val())
+        jQuery('[data-filter-name = assignedtoId]').val(jQuery(this).val())
     } else {
-        jQuery('[data-filter-name = assignedto]').val('')
+        jQuery('[data-filter-name = assignedtoId]').val('')
     }
     jQuery('#filters-form').submit();
 });
 
 jQuery('#filter-my-tasks').change(function () {
     if (jQuery(this).prop("checked")) {
-        jQuery('[data-filter-name = creator]').val(jQuery(this).val())
+        jQuery('[data-filter-name = creatorId]').val(jQuery(this).val())
     } else {
-        jQuery('[data-filter-name = creator]').val('')
+        jQuery('[data-filter-name = creatorId]').val('')
     }
     jQuery('#filters-form').submit();
 });
@@ -32,4 +32,9 @@ jQuery('#filters [data-filter-source]').change(function () {
             }
         });
     });
+});
+
+// Select2 multi-select: Выбор тегов при создании/редактировании таска
+jQuery(document).ready(function() {
+    jQuery('[data-select2-multiple]').select2();
 });

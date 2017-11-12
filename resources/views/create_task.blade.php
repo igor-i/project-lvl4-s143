@@ -12,138 +12,151 @@
             <p class="card-text">
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('tasks.store') }}">
-                {{ csrf_field() }}
 
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} row">
-                    <label for="name" class="col-sm-2 col-form-label">Name*</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" name="name"
-                               value="{{ old('name') }}" required autofocus>
+            {!! Form::open(['route' => 'tasks.store']) !!}
 
-                        @if ($errors->has('name'))
-                            <span class="help-block text-danger">
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} row">
+
+                {!! Form::label('name', 'Name*', ['class' => 'col-sm-2 col-form-label']) !!}
+
+                <div class="col-sm-10">
+
+                    {!! Form::text('name', old('name'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+
+                    @if ($errors->has('name'))
+                        <span class="help-block text-danger">
                                 <strong>{{ $errors->first('name') }}</strong>
                             </span>
-                        @endif
-                    </div>
+                    @endif
                 </div>
+            </div>
 
-                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }} row">
-                    <label for="description" class="col-sm-2 col-form-label">Description</label>
-                    <div class="col-sm-10">
-                        <textarea type="text" class="form-control" id="description" name="description"
-                                  rows="3">{{ old('description') }}</textarea>
+            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }} row">
 
-                        @if ($errors->has('description'))
-                            <span class="help-block text-danger">
+                {!! Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) !!}
+
+                <div class="col-sm-10">
+
+                    {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'rows' => '3']) !!}
+
+                    @if ($errors->has('description'))
+                        <span class="help-block text-danger">
                                 <strong>{{ $errors->first('description') }}</strong>
                             </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }} row">
-                    <label for="status" class="col-sm-2 col-form-label">Status*</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="status" name="status" required>
-                            @foreach ($statuses as $key => $status)
-                                <option value="{{ $status->id }}"
-                                        @if ($status->id == old('status'))
-                                        selected
-                                        @endif
-                                >{{ $status->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    @if ($errors->has('status'))
-                        <span class="help-block text-danger">
-                            <strong>{{ $errors->first('status') }}</strong>
-                        </span>
                     @endif
                 </div>
+            </div>
 
-                <div class="form-group row">
-                    <label for="creator" class="col-sm-2 col-form-label">Creator*</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" id="creator"
-                               value="{{ Auth::user()->name }} ({{ Auth::user()->email }})" required readonly>
-                        <input type="hidden" name="creator" value="{{ Auth::user()->id }}">
-                    </div>
+            <div class="form-group{{ $errors->has('status_id') ? ' has-error' : '' }} row">
 
-                    @if ($errors->has('creator'))
-                        <span class="help-block text-danger">
-                            <strong>{{ $errors->first('creator') }}</strong>
-                        </span>
-                    @endif
+                {!! Form::label('status_id', 'Status*', ['class' => 'col-sm-2 col-form-label']) !!}
+
+                <div class="col-sm-10">
+
+                    {!! Form::select(
+                            'status_id',
+                            $statusesArray,
+                            old('status_id'),
+                            ['class' => 'form-control', 'required']
+                        )
+                    !!}
+
                 </div>
 
-                <div class="form-group{{ $errors->has('assignedto') ? ' has-error' : '' }} row">
-                    <label for="assignedto" class="col-sm-2 col-form-label">AssignedTo</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="assignedto" id="assignedto">
-                            <option
-                                    @if (null == old('assignedto'))
+                @if ($errors->has('status_id'))
+                    <span class="help-block text-danger">
+                            <strong>{{ $errors->first('status_id') }}</strong>
+                        </span>
+                @endif
+            </div>
+
+            <div class="form-group row">
+
+                {!! Form::label('creator', 'Creator*', ['class' => 'col-sm-2 col-form-label']) !!}
+
+                <div class="col-sm-10">
+
+                    {!! Form::text('creator', Auth::user()->name . '(' . Auth::user()->email . ')', ['class' => 'form-control', 'required', 'readonly']) !!}
+                    {!! Form::hidden('creator_id', Auth::user()->id) !!}
+
+                </div>
+
+                @if ($errors->has('creator_id'))
+                    <span class="help-block text-danger">
+                            <strong>{{ $errors->first('creator_id') }}</strong>
+                        </span>
+                @endif
+            </div>
+
+            <div class="form-group{{ $errors->has('assignedto_id') ? ' has-error' : '' }} row">
+
+                {!! Form::label('assignedto_id', 'AssignedTo', ['class' => 'col-sm-2 col-form-label']) !!}
+
+                <div class="col-sm-10">
+
+                    {!! Form::select(
+                            'assignedto_id',
+                            $usersArray,
+                            old('assignedto_id'),
+                            ['placeholder' => '', 'class' => 'form-control']
+                        )
+                    !!}
+
+                </div>
+
+                @if ($errors->has('assignedto_id'))
+                    <span class="help-block text-danger">
+                            <strong>{{ $errors->first('assignedto_id') }}</strong>
+                        </span>
+                @endif
+            </div>
+
+            <div class="form-group{{ $errors->has('tags_ids') ? ' has-error' : '' }} row">
+
+                {!! Form::label('tags_ids', 'Tags', ['class' => 'col-sm-2 col-form-label']) !!}
+
+                <div class="col-sm-10">
+                    <select multiple="multiple" class="form-control" id="tags_ids" name="tags_ids[]" data-select2-multiple>
+                        @foreach ($tags as $key => $tag)
+                            <option value="{{ $tag->id }}"
+                                    @if (null != old('tags_ids'))
+
+                                    @foreach (old('tags_ids') as $oldTagId)
+
+                                    @if ($tag->id == $oldTagId)
                                     selected
                                     @endif
-                            ></option>
-                            @foreach ($users as $key => $user)
-                                <option value="{{ $user->id }}"
-                                        @if ($user->id == old('assignedto'))
-                                        selected
-                                        @endif
-                                >{{ $user->name }} ({{ $user->email }})</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                    @if ($errors->has('assignedto'))
-                        <span class="help-block text-danger">
-                            <strong>{{ $errors->first('assignedto') }}</strong>
+                                    @endforeach
+
+                                    @endif
+                            >{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                @if ($errors->has('tags_ids'))
+                    <span class="help-block text-danger">
+                            <strong>{{ $errors->first('tags_ids') }}</strong>
                         </span>
-                    @endif
+                @endif
+            </div>
+
+            <div class="form-group row">
+                <span class="col-sm-2"></span>
+                <div class="col-sm-10">
+
+                    {!! Form::submit('Create', ['class' => 'btn btn-primary', 'data-disable-with' => 'Creating...']) !!}
+                    {!! link_to_route(
+                        'tasks.index',
+                        $title = 'Cancel',
+                        $parameters = [],
+                        $attributes = ['class' => 'btn btn-light', 'type' => 'button', 'role' => 'button']) !!}
+
                 </div>
+            </div>
+            {!! Form::close() !!}
 
-                <div class="form-group{{ $errors->has('tag') ? ' has-error' : '' }} row">
-                    <label for="tag" class="col-sm-2 col-form-label">Tag</label>
-                    <div class="col-sm-10">
-                        <select multiple class="form-control" id="tag" name="tag[]">
-                            @foreach ($tags as $key => $tag)
-                                <option value="{{ $tag->id }}"
-                                        @if (null != old('tag'))
-
-                                        @foreach (old('tag') as $oldTag)
-
-                                        @if ($tag->id == $oldTag)
-                                        selected
-                                        @endif
-
-                                        @endforeach
-
-                                        @endif
-                                >{{ $tag->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    @if ($errors->has('tag'))
-                        <span class="help-block text-danger">
-                            <strong>{{ $errors->first('tag') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="form-group row">
-                    <span class="col-sm-2"></span>
-                    <div class="col-sm-10">
-                        <input type="submit" class="btn btn-primary" value="Create" data-disable-with="Creating...">
-                        <a type="button" class="btn btn-light" role="button" href="{{ route('tasks.index') }}">
-                            Cancel
-                        </a>
-                    </div>
-                </div>
-            </form>
             </p>
         </div>
     </div>

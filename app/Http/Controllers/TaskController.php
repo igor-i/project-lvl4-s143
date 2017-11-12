@@ -32,10 +32,28 @@ class TaskController extends Controller
         $users = User::orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
 
+        $statusesArray = [];
+        foreach ($statuses as $status) {
+            $statusesArray[$status->id] = $status->name;
+        }
+
+        $usersArray = [];
+        foreach ($users as $user) {
+            $usersArray[$user->id] = "{$user->name} ({$user->email})";
+        }
+
+        $tagsArray = [];
+        foreach ($tags as $tag) {
+            $tagsArray[$tag->id] = $tag->name;
+        }
+
         return view('tasks')
             ->with(compact('tasks'))
             ->with(compact('statuses'))
             ->with(compact('users'))
+            ->with(compact('statusesArray'))
+            ->with(compact('usersArray'))
+            ->with(compact('tagsArray'))
             ->with(compact('tags'));
     }
 
@@ -50,9 +68,21 @@ class TaskController extends Controller
         $users = User::orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
 
+        $statusesArray = [];
+        foreach ($statuses as $status) {
+            $statusesArray[$status->id] = $status->name;
+        }
+
+        $usersArray = [];
+        foreach ($users as $user) {
+            $usersArray[$user->id] = "{$user->name} ({$user->email})";
+        }
+
         return view('create_task')
             ->with(compact('statuses'))
             ->with(compact('users'))
+            ->with(compact('statusesArray'))
+            ->with(compact('usersArray'))
             ->with(compact('tags'));
     }
 
@@ -66,18 +96,14 @@ class TaskController extends Controller
     {
         $this->validator($request);
         $task = new Task;
-        $task->name = $request->name;
-        $task->description = $request->description;
-        $task->status_id = $request->status;
-        $task->creator_id = $request->creator;
-        $task->assignedto_id = $request->assignedto;
+        $task->fill($request->all());
         $task->save();
         flash("Successfully added new '{$request->name}' task")->success();
 
-        if (is_array($request->tag)) {
-            foreach ($request->tag as $item) {
-                $task->tags()->attach($item);
-                $tag = Tag::findOrFail($item);
+        if (is_array($request->tags_ids)) {
+            foreach ($request->tags_ids as $tag_id) {
+                $task->tags()->attach($tag_id);
+                $tag = Tag::findOrFail($tag_id);
                 flash("Successfully added '{$tag->name}' tag for '{$request->name}' task")->success();
             }
         }
@@ -108,10 +134,22 @@ class TaskController extends Controller
         $users = User::orderBy('name')->get();
         $tags = Tag::orderBy('name')->get();
 
+        $statusesArray = [];
+        foreach ($statuses as $status) {
+            $statusesArray[$status->id] = $status->name;
+        }
+
+        $usersArray = [];
+        foreach ($users as $user) {
+            $usersArray[$user->id] = "{$user->name} ({$user->email})";
+        }
+
         return view('edit_task')
             ->with('task', Task::findOrFail($task->id))
             ->with(compact('statuses'))
             ->with(compact('users'))
+            ->with(compact('statusesArray'))
+            ->with(compact('usersArray'))
             ->with(compact('tags'));
     }
 
@@ -125,21 +163,15 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $this->validator($request);
-        $task->fill([
-            'name' => $request->name,
-            'description' => $request->description,
-            'status_id' => $request->status,
-            'creator_id' => $request->creator,
-            'assignedto_id' => $request->assignedto
-        ]);
+        $task->fill($request->all());
         $task->save();
         flash("Successfully updated '{$task->name}' task")->success();
 
         $task->tags()->detach();
-        if (is_array($request->tag)) {
-            foreach ($request->tag as $item) {
-                $task->tags()->attach($item);
-                $tag = Tag::findOrFail($item);
+        if (is_array($request->tags_ids)) {
+            foreach ($request->tags_ids as $tag_id) {
+                $task->tags()->attach($tag_id);
+                $tag = Tag::findOrFail($tag_id);
                 flash("Successfully added '{$tag->name}' tag for '{$request->name}' task")->success();
             }
         }
@@ -178,22 +210,22 @@ class TaskController extends Controller
                 'string',
                 'max:255'
             ],
-            'status' => [
+            'status_id' => [
                 'required',
                 'integer',
                 'exists:statuses,id'
             ],
-            'creator' => [
+            'creator_id' => [
                 'required',
                 'integer',
                 'exists:users,id'
             ],
-            'assignedto' => [
+            'assignedto_id' => [
                 'nullable',
                 'integer',
                 'exists:users,id'
             ],
-            'tag.*' => [
+            'tags_ids.*' => [
                 'nullable',
                 'integer',
                 'exists:tags,id'

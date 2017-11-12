@@ -14,6 +14,9 @@
     <!-- Font Awesome Icons -->
     <script src="https://use.fontawesome.com/e5f9b75319.js"></script>
 
+    <!-- Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet"/>
+
     <!-- Styles -->
     <link rel="stylesheet"
           @if (App::environment() === 'local')
@@ -111,6 +114,9 @@
         src="{{ secure_asset('/js/app.js') }}"
         @endif
 ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+
 <script
         @if (App::environment() === 'local')
         src="{{ asset('/js/myscript.js') }}"

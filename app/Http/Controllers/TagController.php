@@ -49,8 +49,7 @@ class TagController extends Controller
     {
         $this->validator($request);
         $tag = new Tag;
-        $tag->name = $request->name;
-        $tag->color = $request->color;
+        $tag->fill($request->all());
         $tag->save();
         flash("Successfully added new '{$request->name}' tag")->success();
 

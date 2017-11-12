@@ -110,7 +110,7 @@ class TagsTest extends TestCase
 
         $response1 = $this->actingAs($user)
             ->get("/tags?name=test")
-            ->assertViewHas('tags');
+            ->assertStatus(200);
 
         $this->assertCount(0, $response1->original->getData()['tags']);
 
@@ -120,7 +120,7 @@ class TagsTest extends TestCase
 
         $response2 = $this->actingAs($user)
             ->get("/tags?name=test")
-            ->assertViewHas('tags');
+            ->assertStatus(200);
 
         $this->assertCount(2, $response2->original->getData()['tags']);
     }

@@ -49,7 +49,7 @@ class StatusController extends Controller
     {
         $this->validator($request);
         $status = new Status;
-        $status->name = $request->name;
+        $status->fill($request->all());
         $status->save();
         flash("Successfully added new '{$request->name}' task status")->success();
 

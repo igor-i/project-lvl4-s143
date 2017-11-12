@@ -10,27 +10,32 @@
             <h4 class="card-title">Create status</h4>
             <h6 class="card-subtitle mb-2 text-muted">Create a new task status</h6>
             <p class="card-text">
-            <form method="POST" action="{{ route('statuses.store') }}">
-                {{ csrf_field() }}
 
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required autofocus>
+            {!! Form::open(['route' => 'statuses.store']) !!}
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
-                    @if ($errors->has('name'))
-                        <span class="help-block text-danger">
+                {!! Form::label('name', 'Name') !!}
+                {!! Form::text('name', old('name'), ['class' => 'form-control', 'required', 'autofocus']) !!}
+
+                @if ($errors->has('name'))
+                    <span class="help-block text-danger">
                             <strong>{{ $errors->first('name') }}</strong>
                         </span>
-                    @endif
-                </div>
+                @endif
+            </div>
 
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Create" data-disable-with="Creating...">
-                    <a type="button" class="btn btn-light" role="button" href="{{ route('statuses.index') }}">
-                        Cancel
-                    </a>
-                </div>
-            </form>
+            <div class="form-group">
+
+                {!! Form::submit('Create', ['class' => 'btn btn-primary', 'data-disable-with' => 'Creating...']) !!}
+                {!! link_to_route(
+                    'statuses.index',
+                    $title = 'Cancel',
+                    $parameters = [],
+                    $attributes = ['class' => 'btn btn-light', 'type' => 'button', 'role' => 'button']) !!}
+
+            </div>
+            {!! Form::close() !!}
+
             </p>
         </div>
     </div>

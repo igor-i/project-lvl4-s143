@@ -49,10 +49,10 @@ class TasksTest extends TestCase
         $this->post("/tasks", [
             'name' => $task->name,
             'description' => $task->description,
-            'status' => $task->status_id,
-            'creator' => $task->creator_id,
-            'assignedto' => $task->assignedto_id,
-            'tag' => [
+            'status_id' => $task->status_id,
+            'creator_id' => $task->creator_id,
+            'assignedto_id' => $task->assignedto_id,
+            'tags_ids' => [
                 $tags->first()->id,
                 $tags->last()->id,
             ]
@@ -97,10 +97,10 @@ class TasksTest extends TestCase
         $this->post("/tasks/{$task->id}", [
             'name' => $newTask->name,
             'description' => $newTask->description,
-            'status' => $newTask->status_id,
-            'creator' => $task->creator_id,
-            'assignedto' => $newTask->assignedto_id,
-            'tag' => [
+            'status_id' => $newTask->status_id,
+            'creator_id' => $task->creator_id,
+            'assignedto_id' => $newTask->assignedto_id,
+            'tags_ids' => [
                 $tags->first()->id,
                 $tags->last()->id
             ],
@@ -145,10 +145,10 @@ class TasksTest extends TestCase
         $this->post("/tasks", [
             'name' => $task->name,
             'description' => $task->description,
-            'status' => $task->status_id,
-            'creator' => $task->creator_id,
-            'assignedto' => $task->assignedto_id,
-            'tag' => [
+            'status_id' => $task->status_id,
+            'creator_id' => $task->creator_id,
+            'assignedto_id' => $task->assignedto_id,
+            'tags_ids' => [
                 $tags->first()->id,
                 $tags->last()->id,
             ]
@@ -180,7 +180,7 @@ class TasksTest extends TestCase
 
         $response1 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $count1 = count($response1->original->getData()['tasks']);
         $this->assertCount(2, $response1->original->getData()['tasks']);
@@ -189,13 +189,13 @@ class TasksTest extends TestCase
 
         $response2 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $this->assertCount($count1 + 1, $response2->original->getData()['tasks']);
 
         $response3 = $this->actingAs($user)
-            ->get("/tasks?creator={$user->id}")
-            ->assertViewHas('tasks');
+            ->get("/tasks?creatorid={$user->id}")
+            ->assertStatus(200);
 
         $this->assertCount(1, $response3->original->getData()['tasks']);
     }
@@ -212,7 +212,7 @@ class TasksTest extends TestCase
 
         $response1 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $count1 = count($response1->original->getData()['tasks']);
         $this->assertCount(2, $response1->original->getData()['tasks']);
@@ -221,13 +221,13 @@ class TasksTest extends TestCase
 
         $response2 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $this->assertCount($count1 + 1, $response2->original->getData()['tasks']);
 
         $response3 = $this->actingAs($user)
-            ->get("/tasks?assignedto={$user->id}")
-            ->assertViewHas('tasks');
+            ->get("/tasks?assignedtoid={$user->id}")
+            ->assertStatus(200);
 
         $this->assertCount(1, $response3->original->getData()['tasks']);
     }
@@ -244,7 +244,7 @@ class TasksTest extends TestCase
 
         $response1 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $count1 = count($response1->original->getData()['tasks']);
         $this->assertCount(2, $response1->original->getData()['tasks']);
@@ -255,13 +255,13 @@ class TasksTest extends TestCase
 
         $response2 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $this->assertCount($count1 + 1, $response2->original->getData()['tasks']);
 
         $response3 = $this->actingAs($user)
-            ->get("/tasks?status={$status->id}")
-            ->assertViewHas('tasks');
+            ->get("/tasks?statusid={$status->id}")
+            ->assertStatus(200);
 
         $this->assertCount(1, $response3->original->getData()['tasks']);
     }
@@ -278,7 +278,7 @@ class TasksTest extends TestCase
 
         $response1 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $count1 = count($response1->original->getData()['tasks']);
         $this->assertCount(2, $response1->original->getData()['tasks']);
@@ -289,23 +289,23 @@ class TasksTest extends TestCase
         $this->post("/tasks", [
             'name' => $task->name,
             'description' => $task->description,
-            'status' => $task->status_id,
-            'creator' => $task->creator_id,
-            'assignedto' => $task->assignedto_id,
-            'tag' => [
+            'status_id' => $task->status_id,
+            'creator_id' => $task->creator_id,
+            'assignedto_id' => $task->assignedto_id,
+            'tags_ids' => [
                 $tag->id
             ]
         ]);
 
         $response2 = $this->actingAs($user)
             ->get("/tasks")
-            ->assertViewHas('tasks');
+            ->assertStatus(200);
 
         $this->assertCount($count1 + 1, $response2->original->getData()['tasks']);
 
         $response3 = $this->actingAs($user)
-            ->get("/tasks?tag={$tag->id}")
-            ->assertViewHas('tasks');
+            ->get("/tasks?tagid={$tag->id}")
+            ->assertStatus(200);
 
         $this->assertCount(1, $response3->original->getData()['tasks']);
     }

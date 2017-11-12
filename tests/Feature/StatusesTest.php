@@ -109,7 +109,7 @@ class StatusesTest extends TestCase
 
         $response1 = $this->actingAs($user)
             ->get("/statuses?name=todo")
-            ->assertViewHas('statuses');
+            ->assertStatus(200);
 
         $count1 = count($response1->original->getData()['statuses']);
 
@@ -117,7 +117,7 @@ class StatusesTest extends TestCase
 
         $response2 = $this->actingAs($user)
             ->get("/statuses?name=todo")
-            ->assertViewHas('statuses');
+            ->assertStatus(200);
 
         $this->assertCount($count1 + 1, $response2->original->getData()['statuses']);
     }
