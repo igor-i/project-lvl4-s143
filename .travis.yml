@@ -7,3 +7,11 @@ install:
   - make install
 
 script: make lint test
+
+addons:
+  code_climate:
+    repo_token:
+      secure: "UsGUZzFhriaRz5WYAaIT8otO0FVA17O06ZTAcqpdfHOA7gTgzSr57c4SZzDKTk6rG5oajqbbkksTalE3nOCNDlMZLZ+dhm5AXeg812RTPgB062BDkaQ+4+YTBZVX3ERL3t8x95xUPGdOEF93bh8B7xvbkeOz7WL9ukajcEbyA+WO5tjZJ6Ctxb2a7kSjj2tv8kPOs1QyAVigygxnBAlmWDaNX42qCGkVYkNUTP8zpPxSpoduIzdsF9j9IBVn4jtsO/PF1er1+4jNE/3ECU9jiPD53mxTZqSzrye1M5u3Ojq3YWSgcNtuz5TK/oCKg7pFEG+2isrXHpTW5qrgaj9ze5ajOwjDVWC5oQBLtAkyVbwVEYXrpSbIHl0geITSy+V7R5zc0Mf1rw89Ku9mmQEksHCiRcud4GikPIoGCYaQ63kTdZXOMc2SXAhG0TWGbzHl5hbOwaj6LvrEiPFpkbbPRR3rxHdat6eGa2g8cmMZP8UjYEvt9hbsAbLJkaFrAJMPvKLI0E230Ey1SV9Uqx9j6XisibaWsNxzh1lEJWTQAB+ZPvmucRWLHc77PN+TfI0ZVwU98pz74uSaplYRC7jsmpvMV53Opmzm3XDlTqzh4HMPDHUiZB0Pu/oQRUq/xiSRvV6uMsZagujEFpyXHyRZiPdLStexnOqWX8WoQj6GjiY="
+
+after_script:
+  - vendor/bin/test-reporter
